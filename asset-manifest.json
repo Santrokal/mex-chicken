@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/mex-chicken/static/css/main.b9d3a917.css",
+    "main.js": "/mex-chicken/static/js/main.76e1277c.js",
+    "static/js/453.57eabeb6.chunk.js": "/mex-chicken/static/js/453.57eabeb6.chunk.js",
+    "static/media/image 99.png": "/mex-chicken/static/media/image 99.993702d46d28b7978324.png",
+    "static/media/image100.jpeg": "/mex-chicken/static/media/image100.4eecae8cbbb9c91a2c31.jpeg",
+    "index.html": "/mex-chicken/index.html",
+    "main.b9d3a917.css.map": "/mex-chicken/static/css/main.b9d3a917.css.map",
+    "main.76e1277c.js.map": "/mex-chicken/static/js/main.76e1277c.js.map",
+    "453.57eabeb6.chunk.js.map": "/mex-chicken/static/js/453.57eabeb6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b9d3a917.css",
+    "static/js/main.76e1277c.js"
+  ]
+}
