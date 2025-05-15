@@ -1,0 +1,43 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        darkred: "#c60000",
+        red: "#ff0000",
+        base: "#000",
+        base1: "#ffffff",
+        yellow: "#f7efbb",
+        gray: "#8c8c90",
+        lightgray: "#f2f4f3",
+        skyblue: "#60a5fa",
+        green400: "#36353F",
+        red500: "#D01C1A",
+        grayback: "#e5e7eb",
+        gray500: "#8C8B91",
+        base2: "#000",
+        green200: "#00BA0C",
+        grey300: "#E6E6E7",
+        green300: "#57565E",
+        green500: "#04030F",
+        yellow800: "#856B24",
+        grey500: "#F2F4F3",
+        blue: "#0b20d7",
+      },
+      borderRadius: {
+        sm2: "8px",
+      },
+      fontFamily: {
+        Merienda: ["Merienda", "cursive"],
+        MazzardhBold: ["MazzardH-Bold", "sans-serif"],
+        AvertaStdBlack: ["AvertaStd-Black"],
+        AvertaStdRegular: ["AvertaStd-Regular"],
+        AvertaStdBold: ["AvertaStd-Bold"],
+        AvertaStdEB: ["AvertaStd-ExtraBold"],
+        Avertastd: ["AvertaStd-Semibold"],
+      },
+    },
+  },
+  plugins: [],
+};
