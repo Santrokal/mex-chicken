@@ -1,10 +1,17 @@
+/* eslint-disable jsx-a11y/no-redundant-roles */
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Info from "./Info";
-import AddtoCartInfo from "./AddtoCartInfo";
+import ClassicBurgers from "./ClassicBurger";
+import MincedChickenBurgers from "./MincedChickenBurger";
+import VeggieBurgers from "./VeggieBurger";
+import QuarterPounders from "./QuarterPounder";
+import HalfPounder from "./HalfPounder";
 import { useOrder } from "../components/OrderContext";
 import FriedChicken from "./FriedChicken";
 import KidsMeals from "./KidsMeals";
+import Alert from "./Alert";
 
 const Order1 = () => {
   const navigate = useNavigate();
@@ -23,7 +30,13 @@ const Order1 = () => {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
-  const [showAddtoCartInfo, setShowAddtoCartInfo] = useState(false);
+  const [showClassicBurger, setShowClassicBurger] = useState(false);
+  const [showMincedChickenBurger, setShowMincedChickenBurger] = useState(false);
+  const [showVeggieBurger, setShowVeggieBurger] = useState(false);
+  const [showQuarterPounder, setShowQuarterPounder] = useState(false);
+  const [showHalfPounder, setShowHalfPounder] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+
   const scrollRef = useRef(null);
   const [isValid, setIsValid] = useState(null);
   const [showAllergyPopup, setShowAllergyPopup] = useState(false);
@@ -98,24 +111,56 @@ const Order1 = () => {
     setIsValid(null);
   };
 
+  const handleCheckout = () => {
+    const isPickupInvalid = orderType === "pickup" && !pickupTime;
+    const isDeliveryInvalid =
+      orderType === "delivery" && (!isValid || !submittedCode);
+
+    if (!orderType || isPickupInvalid || isDeliveryInvalid) {
+      setShowAlert(true);
+      return;
+    }
+
+    setShowAlert(false);
+    navigate("/checkout");
+  };
+
   /* For Classic Shawarma  */
   const handleAddToCart = (item) => {
     setCartItems((prevItems) => {
       const existingIndex = prevItems.findIndex(
         (i) => i.name === item.name && i.variation === item.variation
       );
+
       if (existingIndex !== -1) {
         const updated = [...prevItems];
-        updated[existingIndex].quantity += item.quantity;
+        updated[existingIndex] = {
+          ...updated[existingIndex],
+          quantity: updated[existingIndex].quantity + item.quantity,
+        };
         return updated;
       }
-      return [...prevItems, item];
+
+      return [...prevItems, { ...item, quantity: item.quantity }];
     });
-    setShowAddtoCartInfo(false);
+
+    setShowClassicBurger(false);
   };
 
-  const handleAddToCart1 = (item) => {
-    setCartItems((prev) => [...prev, item]);
+  const handleAddToCart1 = (product) => {
+    setCartItems((prevItems) => {
+      const existingItem = prevItems.find((item) => item.name === product.name);
+
+      if (existingItem) {
+        return prevItems.map((item) =>
+          item.name === product.name
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        return [...prevItems, { ...product, quantity: 1 }];
+      }
+    });
   };
 
   const handleClearCart = () => setCartItems([]);
@@ -149,6 +194,7 @@ const Order1 = () => {
           </p>
         </div>
       </div>
+
       <section
         class="order-now relative bg-cover  bg-center bg-fixed"
         style={{ backgroundImage: 'url("/images/Group.jpg")' }}>
@@ -210,7 +256,13 @@ const Order1 = () => {
                     </h5>
                   </div>
                 </div>
-                <nav className="custom_scrollbar flex flex-1 flex-col max-h-[70vh] overflow-x-hidden overflow-y-auto px-2">
+                <nav
+                  className="custom_scrollbar flex flex-1 flex-col max-h-[70vh] overflow-x-hidden overflow-y-auto px-2"
+                  style={{
+                    overflow: "auto",
+                    scrollbarWidth: "none",
+                    msOverflowStyle: "none",
+                  }}>
                   <ul role="list" className="flex flex-1  flex-col gap-y-7">
                     <li>
                       <ul role="list" className="-mx-2 text-black space-y-1">
@@ -366,7 +418,13 @@ const Order1 = () => {
                 </nav>
               </div>
               {/* Mobile View */}
-              <div className="lg:hidden flex items-center gap-4 overflow-x-auto custom-scrollbar-hide py-4 px-2">
+              <div
+                className="lg:hidden flex items-center gap-4 overflow-x-auto custom-scrollbar-hide py-4 px-2"
+                style={{
+                  overflow: "auto",
+                  scrollbarWidth: "none",
+                  msOverflowStyle: "none",
+                }}>
                 {[
                   {
                     id: 1,
@@ -459,27 +517,31 @@ const Order1 = () => {
               </div>
               <div>
                 <div>
-                  <div
-                    className="category-products flex flex-col gap-2 gap-y-3 mt-3 shadow-custom rounded-sm2"
-                    id="1">
-                    <div className="category-container max-h-[75vh] overflow-y-auto custom_scrollbar pr-2">
+                  <div className="category-products flex flex-col gap-2 gap-y-3 mt-3 shadow-custom rounded-sm2">
+                    <div
+                      className="category-container max-h-[75vh] overflow-y-auto custom_scrollbar pr-2"
+                      style={{
+                        overflow: "auto",
+                        scrollbarWidth: "none",
+                        msOverflowStyle: "none",
+                      }}>
                       <div
                         className="category-products flex flex-col gap-2 gap-y-3 mt-3 shadow-custom rounded-sm2"
                         id="1">
                         <div className="category-name text-base text-red font-Avertastd capitalize pb-3">
-                          Chicken Starte's
+                          Burgers
                         </div>
                         <div
                           className="flex flex-col gap-1 p-2 lg:p-5 bg-white rounded-md"
                           style={{
                             boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
                           }}>
-                          <div className="flex gap-4 items-center justify-between">
+                          <div className="flex flex-wrap gap-4 items-center justify-between">
                             <div className="product-name w-full">
-                              <div className="flex items-center bg-white shadow-custom rounded-lg p-3 gap-4 max-w-xl w-full">
+                              <div className="flex flex-col sm:flex-row items-center bg-white shadow-custom rounded-lg p-3 gap-4 w-full">
                                 {/* Product Image */}
                                 <img
-                                  src="/images/french-fries.png"
+                                  src="/images/ClassicBurger.jpeg"
                                   loading="lazy"
                                   className="w-96 h-32 object-cover overflow-hidden rounded-md"
                                   alt="Classic Shawarma"
@@ -508,16 +570,247 @@ const Order1 = () => {
                                       </span>
                                     </div>
                                     <button
-                                      onClick={() => setShowAddtoCartInfo(true)}
+                                      onClick={() => setShowClassicBurger(true)}
                                       className="bg-red text-white px-8 py-2 rounded-md text-lg font-semibold hover:bg-red transition">
                                       Add
                                     </button>
                                   </div>
                                 </div>
                                 {/* Popup */}
-                                {showAddtoCartInfo && (
-                                  <AddtoCartInfo
-                                    onClose={() => setShowAddtoCartInfo(false)}
+                                {showClassicBurger && (
+                                  <ClassicBurgers
+                                    onClose={() => setShowClassicBurger(false)}
+                                    onAddToCart={handleAddToCart}
+                                  />
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div
+                          className="flex flex-col gap-1 p-2 lg:p-5 bg-white rounded-md"
+                          style={{
+                            boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+                          }}>
+                          <div className="flex flex-wrap gap-4 items-center justify-between">
+                            <div className="product-name w-full">
+                              <div className="flex flex-col sm:flex-row items-center bg-white shadow-custom rounded-lg p-3 gap-4 w-full">
+                                {/* Product Image */}
+                                <img
+                                  src="/images/mincedchickenburger.jpeg"
+                                  loading="lazy"
+                                  className="w-96 h-32 object-cover overflow-hidden rounded-md"
+                                  alt="Classic Shawarma"
+                                />
+                                {/* Product Details */}
+                                <div className="flex flex-col flex-grow">
+                                  <div className="text-base text-black font-AvertaStdBold capitalize break-word">
+                                    Minced Chicken Burger
+                                  </div>
+                                  <br></br>
+                                  <p className="text-sm text-gray500 line-clamp-2">
+                                    Lorem Ipsum is simply dummy text of the
+                                    printing typeset industry. Lorem Ipsum has
+                                    been the industry's standard dummy text ever
+                                    since the 1500s
+                                  </p>
+
+                                  {/* Price & Add Button */}
+                                  <div className="flex items-center justify-between mt-2">
+                                    <div className="flex items-center gap-2">
+                                      <span className="text-lg font-semibold text-black">
+                                        £4.49
+                                      </span>
+                                      <span className="text-lg text-gray500   line-through">
+                                        £6.00
+                                      </span>
+                                    </div>
+                                    <button
+                                      onClick={() =>
+                                        setShowMincedChickenBurger(true)
+                                      }
+                                      className="bg-red text-white px-8 py-2 rounded-md text-lg font-semibold hover:bg-red transition">
+                                      Add
+                                    </button>
+                                  </div>
+                                </div>
+                                {/* Popup */}
+                                {showMincedChickenBurger && (
+                                  <MincedChickenBurgers
+                                    onClose={() =>
+                                      setShowMincedChickenBurger(false)
+                                    }
+                                    onAddToCart={handleAddToCart}
+                                  />
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          className="flex flex-col gap-1 p-2 lg:p-5 bg-white rounded-md"
+                          style={{
+                            boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+                          }}>
+                          <div className="flex flex-wrap gap-4 items-center justify-between">
+                            <div className="product-name w-full">
+                              <div className="flex flex-col sm:flex-row items-center bg-white shadow-custom rounded-lg p-3 gap-4 w-full">
+                                {/* Product Image */}
+                                <img
+                                  src="/images/veggieburger.jpeg"
+                                  loading="lazy"
+                                  className="w-96 h-32 object-cover overflow-hidden rounded-md"
+                                  alt="Classic Shawarma"
+                                />
+                                {/* Product Details */}
+                                <div className="flex flex-col flex-grow">
+                                  <div className="text-base text-black font-AvertaStdBold capitalize break-word">
+                                    Veggie Burger
+                                  </div>
+                                  <br></br>
+                                  <p className="text-sm text-gray500 line-clamp-2">
+                                    Lorem Ipsum is simply dummy text of the
+                                    printing typeset industry. Lorem Ipsum has
+                                    been the industry's standard dummy text ever
+                                    since the 1500s
+                                  </p>
+
+                                  {/* Price & Add Button */}
+                                  <div className="flex items-center justify-between mt-2">
+                                    <div className="flex items-center gap-2">
+                                      <span className="text-lg font-semibold text-black">
+                                        £3.99
+                                      </span>
+                                      <span className="text-lg text-gray500   line-through">
+                                        £5.00
+                                      </span>
+                                    </div>
+                                    <button
+                                      onClick={() => setShowVeggieBurger(true)}
+                                      className="bg-red text-white px-8 py-2 rounded-md text-lg font-semibold hover:bg-red transition">
+                                      Add
+                                    </button>
+                                  </div>
+                                </div>
+                                {/* Popup */}
+                                {showVeggieBurger && (
+                                  <VeggieBurgers
+                                    onClose={() => setShowVeggieBurger(false)}
+                                    onAddToCart={handleAddToCart}
+                                  />
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          className="flex flex-col gap-1 p-2 lg:p-5 bg-white rounded-md"
+                          style={{
+                            boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+                          }}>
+                          <div className="flex flex-wrap gap-4 items-center justify-between">
+                            <div className="product-name w-full">
+                              <div className="flex flex-col sm:flex-row items-center bg-white shadow-custom rounded-lg p-3 gap-4 w-full">
+                                {/* Product Image */}
+                                <img
+                                  src="/images/halfpounderburger.jpeg"
+                                  loading="lazy"
+                                  className="w-96 h-32 object-cover overflow-hidden rounded-md"
+                                  alt="Classic Shawarma"
+                                />
+                                {/* Product Details */}
+                                <div className="flex flex-col flex-grow">
+                                  <div className="text-base text-black font-AvertaStdBold capitalize break-word">
+                                    1/4 Pounder Burger
+                                  </div>
+                                  <br></br>
+                                  <p className="text-sm text-gray500 line-clamp-2">
+                                    Lorem Ipsum is simply dummy text of the
+                                    printing typeset industry. Lorem Ipsum has
+                                    been the industry's standard dummy text ever
+                                    since the 1500s
+                                  </p>
+
+                                  {/* Price & Add Button */}
+                                  <div className="flex items-center justify-between mt-2">
+                                    <div className="flex items-center gap-2">
+                                      <span className="text-lg font-semibold text-black">
+                                        £3.99
+                                      </span>
+                                      <span className="text-lg text-gray500   line-through">
+                                        £5.00
+                                      </span>
+                                    </div>
+                                    <button
+                                      onClick={() =>
+                                        setShowQuarterPounder(true)
+                                      }
+                                      className="bg-red text-white px-8 py-2 rounded-md text-lg font-semibold hover:bg-red transition">
+                                      Add
+                                    </button>
+                                  </div>
+                                </div>
+                                {/* Popup */}
+                                {showQuarterPounder && (
+                                  <QuarterPounders
+                                    onClose={() => setShowQuarterPounder(false)}
+                                    onAddToCart={handleAddToCart}
+                                  />
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          className="flex flex-col gap-1 p-2 lg:p-5 bg-white rounded-md"
+                          style={{
+                            boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+                          }}>
+                          <div className="flex flex-wrap gap-4 items-center justify-between">
+                            <div className="product-name w-full">
+                              <div className="flex flex-col sm:flex-row items-center bg-white shadow-custom rounded-lg p-3 gap-4 w-full">
+                                {/* Product Image */}
+                                <img
+                                  src="/images/12halfpounderburger.jpeg"
+                                  loading="lazy"
+                                  className="w-96 h-32 object-cover overflow-hidden rounded-md"
+                                  alt="Classic Shawarma"
+                                />
+                                {/* Product Details */}
+                                <div className="flex flex-col flex-grow">
+                                  <div className="text-base text-black font-AvertaStdBold capitalize break-word">
+                                    1/2 Pounder Burger
+                                  </div>
+                                  <br></br>
+                                  <p className="text-sm text-gray500 line-clamp-2">
+                                    Lorem Ipsum is simply dummy text of the
+                                    printing typeset industry. Lorem Ipsum has
+                                    been the industry's standard dummy text ever
+                                    since the 1500s
+                                  </p>
+
+                                  {/* Price & Add Button */}
+                                  <div className="flex items-center justify-between mt-2">
+                                    <div className="flex items-center gap-2">
+                                      <span className="text-lg font-semibold text-black">
+                                        £5.49
+                                      </span>
+                                      <span className="text-lg text-gray500   line-through">
+                                        £7.00
+                                      </span>
+                                    </div>
+                                    <button
+                                      onClick={() => setShowHalfPounder(true)}
+                                      className="bg-red text-white px-8 py-2 rounded-md text-lg font-semibold hover:bg-red transition">
+                                      Add
+                                    </button>
+                                  </div>
+                                </div>
+                                {/* Popup */}
+                                {showHalfPounder && (
+                                  <HalfPounder
+                                    onClose={() => setShowHalfPounder(false)}
                                     onAddToCart={handleAddToCart}
                                   />
                                 )}
@@ -526,7 +819,7 @@ const Order1 = () => {
                           </div>
                         </div>
                       </div>
-                      <FriedChicken />
+                      <FriedChicken onAddToCart={handleAddToCart1} />
                       <KidsMeals onAddToCart={handleAddToCart1} />
                     </div>
                   </div>
@@ -539,6 +832,8 @@ const Order1 = () => {
                 className="sticky top-[128px] bg-white p-5 shadow-custom rounded-sm2 custom_scrollbar"
                 style={{
                   maxHeight: "calc(100vh - 128px)",
+                  scrollbarWidth: "none",
+                  msOverflowStyle: "none",
                   overflowY: "auto",
                   boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
                 }}>
@@ -683,14 +978,14 @@ const Order1 = () => {
                           <div className="edit-pop-up max-w-md mx-auto bg-white rounded-md shadow-custom p-5 text-center">
                             <div className="flex justify-end">
                               <div
-                                className="cursor-pointer text-xl text-gray-500"
+                                className="cursor-pointer text-3xl text-black"
                                 onClick={handleClosePopup}>
                                 &times;
                               </div>
                             </div>
                             <div className="flex flex-col gap-3 items-center py-3">
                               <img
-                                src="/images/delivery-man.svg"
+                                src="/images/deliveryman.png"
                                 alt="Delivery Not Eligible"
                                 className="w-20 h-20"
                               />
@@ -805,12 +1100,20 @@ const Order1 = () => {
                           {item.comment && (
                             <div className="flex flex-col w-full pl-1 mt-1">
                               <div className="text-xs py-1 text-gray font-AvertastdRegular break-words">
-                                Comment:
-                              </div>
-                              <div className="flex items-center flex-wrap">
-                                <p className="text-xs text-gray font-AvertastdRegular">
+                                Comment:{" "}
+                                <span className="text-xs text-gray font-AvertastdRegular">
                                   {item.comment}
-                                </p>
+                                </span>
+                              </div>
+                            </div>
+                          )}
+                          {item.addon && (
+                            <div className="flex flex-col w-full pl-1 mt-1">
+                              <div className="text-xs py-1 text-gray font-AvertastdRegular break-words">
+                                Add On:{" "}
+                                <span className="text-xs text-gray font-AvertastdRegular">
+                                  {item.addon}
+                                </span>
                               </div>
                             </div>
                           )}
@@ -913,21 +1216,27 @@ const Order1 = () => {
                           className="w-full px-3 py-3 border bg-white border-cgray-600 rounded-sm2 text-xs font-AvertastdRegular focus-visible:outline-none"
                           placeholder="e.g Instruction of your order"
                           type="text"
-                          value={orderInstructions} // Bind to shared state
-                          onChange={(e) => setOrderInstructions(e.target.value)} // Update shared state
+                          value={orderInstructions}
+                          onChange={(e) => setOrderInstructions(e.target.value)}
                         />
                       </div>
-                      <button
-                        className="checkout-button flex items-center justify-center cursor-pointer disabled:cursor-not-allowed w-full text-white bg-red hover:bg-primary py-4 text-center rounded-sm2 uppercase"
-                        onClick={() => navigate("/checkout")}
-                        disabled={
-                          !orderType ||
-                          (orderType === "pickup" && !pickupTime) ||
-                          (orderType === "delivery" &&
-                            (!isValid || !submittedCode))
-                        }>
-                        checkout
-                      </button>
+                      <>
+                        <button
+                          className="checkout-button flex items-center justify-center cursor-pointer w-full text-white bg-red hover:bg-primary py-4 text-center rounded-sm2 uppercase"
+                          onClick={handleCheckout}>
+                          checkout
+                        </button>
+                        {showAlert && (
+                          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                            <div className="relative bg-white rounded-lg shadow-xl max-w-[95%] sm:max-w-[32rem] w-full p-4">
+                              <Alert
+                                show={showAlert}
+                                onClose={() => setShowAlert(false)}
+                              />
+                            </div>
+                          </div>
+                        )}
+                      </>
                     </div>
                   </>
                 ) : (
@@ -985,7 +1294,13 @@ const Order1 = () => {
       </section>
       {/* Cart Drawer */}
       {isDrawerOpen && (
-        <div className="fixed inset-0 bg-white z-50 p-4 overflow-y-auto">
+        <div
+          className="fixed inset-0 bg-white z-50 p-4 overflow-y-auto"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            overflowY: "auto",
+          }}>
           <div className="flex justify-between items-center mb-4">
             <h6 className="text-black font-Avertastd capitalize">Your Cart</h6>
             <button
@@ -995,61 +1310,156 @@ const Order1 = () => {
             </button>
           </div>
 
-          {/* Order Type Selection */}
-          <div className="flex items-center gap-2 mt-3">
-            {["pickup", "delivery"].map((type) => (
+          <div className="w-full">
+            {/* Order Type Buttons */}
+            <div className="flex items-center gap-2 mt-3">
               <button
-                key={type}
-                onClick={() => setOrderType(type)}
+                onClick={() => setOrderType("pickup")}
                 className={`border-2 ${
-                  orderType === type ? "border-red" : "border-gray-300"
-                } bg-gray-200 rounded-md p-2 flex-1 cursor-pointer flex flex-col gap-1`}>
+                  orderType === "pickup" ? "border-red" : "border-gray-300"
+                } bg-grey300 rounded-md p-2 flex-1 cursor-pointer flex flex-col items-center gap-1`}
+                aria-hidden="true">
+                {/* Radio + Label */}
                 <div className="flex items-center gap-2">
                   <input
-                    type="radio"
                     name="orderType"
-                    checked={orderType === type}
+                    type="radio"
+                    checked={orderType === "pickup"}
                     readOnly
                     className="h-5 w-5 cursor-pointer"
                   />
                   <span className="text-red text-base font-semibold capitalize">
-                    {type}
+                    Pickup
                   </span>
                 </div>
-                <span className="text-xs ps-1">
-                  Starting at : {type === "pickup" ? "03:00 PM" : "04:00 PM"}
+                <span className="text-xs text-center">
+                  Starting at : 03:00 PM
                 </span>
               </button>
-            ))}
-          </div>
 
-          {/* Delivery Info */}
-          {orderType === "delivery" && (
-            <div className="mt-4 flex flex-col gap-3">
-              {isValid === true && (
-                <div className="w-full bg-green-100 text-green-700 p-2 rounded-md text-center font-semibold">
-                  Delivery Available to: {submittedCode}
-                </div>
-              )}
-              <input
-                type="text"
-                placeholder="Enter Your Postcode"
-                value={postcode}
-                onChange={(e) => setPostcode(e.target.value)}
-                className="border border-gray-300 p-3 w-full rounded-md"
-              />
               <button
-                onClick={handleCheckDelivery}
-                className="bg-red text-white p-2 rounded-md font-semibold">
-                CHECK DELIVERY
-              </button>
-              {isValid === false && (
-                <div className="text-red text-sm mt-2">
-                  Sorry, delivery is not available to this area.
+                onClick={() => setOrderType("delivery")}
+                className={`border-2 ${
+                  orderType === "delivery" ? "border-red" : "border-gray-300"
+                } bg-grey300 rounded-md p-2 flex-1 cursor-pointer flex flex-col items-center gap-1`}
+                aria-hidden="true">
+                <div className="flex items-center gap-2">
+                  <input
+                    name="orderType"
+                    type="radio"
+                    checked={orderType === "delivery"}
+                    readOnly
+                    className="h-5 w-5 cursor-pointer"
+                  />
+                  <span className="text-red text-base font-semibold capitalize">
+                    Delivery
+                  </span>
                 </div>
-              )}
+                <span className="text-xs text-center">
+                  Starting at : 04:00 PM
+                </span>
+              </button>
             </div>
-          )}
+
+            {/* Conditional Pickup or Delivery Section */}
+            {orderType === "pickup" ? (
+              <div className="flex flex-col justify-center gap-4 items-center mt-5">
+                <div className="flex flex-col gap-3 w-full">
+                  <p className="text-cgreen-500 text-base font-semibold text-center capitalize">
+                    Pickup Time
+                  </p>
+                  <div className="flex flex-col gap-1">
+                    <div className="relative w-full">
+                      <select
+                        className="w-full appearance-none p-2 border-2 border-grey300 rounded pr-10"
+                        value={pickupTime}
+                        onChange={handlePickupChange}>
+                        <option value="" disabled>
+                          Select Your Pickup Time
+                        </option>
+                        {timeOptions.map((time, index) => (
+                          <option key={index} value={time}>
+                            {time}
+                          </option>
+                        ))}
+                      </select>
+
+                      {/* Chevron Icon */}
+                      <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-500">
+                        <i className="bi bi-chevron-down"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center gap-3 w-full mt-5">
+                {isValid === true && (
+                  <div className="w-full bg-white border-2 border-green-500 text-black p-2 rounded-md font-semibold flex items-center justify-center gap-2">
+                    <span>Delivery Available to: {submittedCode}</span>
+                    <img
+                      src="/images/deliverydelete.png"
+                      alt="Close"
+                      className="w-5 h-5 cursor-pointer"
+                      onClick={() => {
+                        setSubmittedCode("");
+                        setIsValid(null);
+                        setPostcode("");
+                      }}
+                    />
+                  </div>
+                )}
+
+                <div className="w-full">
+                  <p className="text-cgreen-500 text-base font-semibold text-center">
+                    Enter Delivery Postcode
+                  </p>
+                  <input
+                    type="text"
+                    placeholder="Enter Your Postcode"
+                    value={postcode}
+                    onChange={(e) => setPostcode(e.target.value)}
+                    className="border border-gray-300 p-3 w-full rounded-md mt-3"
+                  />
+                </div>
+                <button
+                  onClick={handleCheckDelivery}
+                  className="bg-red text-base font-semibold text-white w-full p-2 rounded-md cursor-pointer">
+                  CHECK DELIVERY
+                </button>
+
+                {/* Pop-up */}
+                {isValid === false && (
+                  <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-40 z-50">
+                    <div className="edit-pop-up max-w-md mx-auto bg-white rounded-md shadow-custom p-5 text-center">
+                      <div className="flex justify-end">
+                        <div
+                          className="cursor-pointer text-3xl text-black"
+                          onClick={handleClosePopup}>
+                          &times;
+                        </div>
+                      </div>
+                      <div className="flex flex-col gap-3 items-center py-3">
+                        <img
+                          src="/images/deliveryman.png"
+                          alt="Delivery Not Eligible"
+                          className="w-20 h-20"
+                        />
+                        <p className="text-base font-semibold text-black">
+                          No Delivery to this Area
+                        </p>
+                        <button
+                          onClick={handleClosePopup}
+                          className="p-2 px-6 rounded-md bg-red w-50 text-white text-base font-semibold">
+                          Ok
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
 
           {/* Cart Contents */}
           {cartItems.length > 0 ? (
@@ -1141,12 +1551,20 @@ const Order1 = () => {
                     {item.comment && (
                       <div className="flex flex-col w-full pl-1 mt-1">
                         <div className="text-xs py-1 text-gray font-AvertastdRegular break-words">
-                          Comment:
-                        </div>
-                        <div className="flex items-center flex-wrap">
-                          <p className="text-xs text-gray font-AvertastdRegular">
+                          Comment:{" "}
+                          <span className="text-xs text-gray font-AvertastdRegular">
                             {item.comment}
-                          </p>
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                    {item.addon && (
+                      <div className="flex flex-col w-full pl-1 mt-1">
+                        <div className="text-xs py-1 text-gray font-AvertastdRegular break-words">
+                          Add On:{" "}
+                          <span className="text-xs text-gray font-AvertastdRegular">
+                            {item.addon}
+                          </span>
                         </div>
                       </div>
                     )}
@@ -1247,16 +1665,23 @@ const Order1 = () => {
                     onChange={(e) => setOrderInstructions(e.target.value)}
                   />
                 </div>
-                <button
-                  className="checkout-button flex items-center justify-center cursor-pointer disabled:cursor-not-allowed w-full text-white bg-red hover:bg-primary py-4 text-center rounded-sm2 uppercase"
-                  onClick={() => navigate("/checkout")}
-                  disabled={
-                    !orderType ||
-                    (orderType === "pickup" && !pickupTime) ||
-                    (orderType === "delivery" && (!isValid || !submittedCode))
-                  }>
-                  checkout
-                </button>
+                <>
+                  <button
+                    className="checkout-button flex items-center justify-center cursor-pointer w-full text-white bg-red hover:bg-primary py-4 text-center rounded-sm2 uppercase"
+                    onClick={handleCheckout}>
+                    checkout
+                  </button>
+                  {showAlert && (
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                      <div className="relative bg-white rounded-lg shadow-xl max-w-[95%] sm:max-w-[32rem] w-full p-4">
+                        <Alert
+                          show={showAlert}
+                          onClose={() => setShowAlert(false)}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </>
               </div>
             </>
           ) : (

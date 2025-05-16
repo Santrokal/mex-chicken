@@ -4,7 +4,7 @@ const FooterSection = () => {
       <div className="container">
         <div className="py-10 md:py-7 border-b border-green400 footer-bar flex flex-col md:flex-row justify-between items-center pb-12 md:pb-6 text-color">
           <div className="mb-9 md:mb-0">
-            <a href="/">
+            <a href="/home">
               <img
                 src="/images/fav-Dark.png"
                 alt="website-logo"
@@ -17,14 +17,14 @@ const FooterSection = () => {
               <div>
                 <a
                   className="text-base1 hover:text-red font-Avertastd"
-                  href="/">
+                  href="/home">
                   About
                 </a>
               </div>
               <div>
                 <a
                   className="text-base1 hover:text-red font-Avertastd active"
-                  href="/">
+                  href="/order">
                   Order Now
                 </a>
               </div>
@@ -116,7 +116,9 @@ const FooterSection = () => {
             </div>
           </div>
         </div>
-        <a className="logo pt-5 flex justify-center cursor-pointer" href="/">
+        <a
+          className="logo pt-5 flex justify-center cursor-pointer"
+          href="/home">
           <img
             src="/images/mex-chickenwhite.png"
             alt="website-logo"

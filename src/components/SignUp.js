@@ -3,15 +3,11 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
 
-const SignUp = () => {
-  const [isOpen, setIsOpen] = useState(true);
+const SignUp = ({ onClose }) => {
+  console.log("SignUp component rendering");
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
-
-  const handleClose = () => {
-    setIsOpen(false);
-    navigate("/home");
-  };
+  const [error, setError] = useState("");
 
   const [formData, setFormData] = useState({
     email: "",
@@ -34,13 +30,98 @@ const SignUp = () => {
     }));
   };
 
-  const nextStep = () => setStep((prev) => prev + 1);
+  const nextStep = () => {
+    setError("");
+    if (step === 1) {
+      const { email, password, confirmPassword } = formData;
+
+      if (!email || !password || !confirmPassword) {
+        setError("Please fill in all fields");
+        return;
+      }
+
+      const isValidEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      };
+
+      if (!isValidEmail(email)) {
+        setError("Please enter a valid email address");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        setError("Passwords do not match");
+        return;
+      }
+    }
+
+    if (step === 2) {
+      const { firstName, lastName, phone } = formData;
+
+      if (!firstName || !lastName || !phone) {
+        setError("Please fill in all personal details");
+        return;
+      }
+    }
+
+    setStep((prev) => prev + 1);
+  };
+
   const prevStep = () => setStep((prev) => prev - 1);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitting:", formData);
-    handleClose();
+    console.log("SignUp form submitted");
+
+    for (let key in formData) {
+      if (!formData[key]) {
+        setError("Please fill in all fields");
+        return;
+      }
+    }
+
+    const isValidEmail = (email) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    };
+
+    if (!isValidEmail(formData.email)) {
+      setError("Please enter a valid email address");
+      return;
+    }
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    setError("");
+
+    try {
+      const response = await fetch("http://localhost:8000/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to save user data");
+      }
+
+      console.log("Successfully saved:", formData);
+      onClose();
+      navigate("/home");
+    } catch (error) {
+      console.error("Error saving data:", error);
+      alert("Failed to save user data. Please try again.");
+    }
+  };
+
+  const handleClose = () => {
+    console.log("SignUp dialog closing via close button");
+    onClose();
   };
 
   const renderStep = () => {
@@ -62,6 +143,7 @@ const SignUp = () => {
                 onChange={handleChange}
                 required
               />
+              {error && <div className="text-red text-xs mt-1">{error}</div>}
             </div>
             <div className="pb-4">
               <input
@@ -87,7 +169,7 @@ const SignUp = () => {
             </div>
             <button
               type="button"
-              className="w-full bg-primary text-white py-2 rounded-md"
+              className="w-full bg-red text-base1 font-AvertaStdBold py-2 rounded-md"
               onClick={nextStep}>
               Next
             </button>
@@ -132,12 +214,12 @@ const SignUp = () => {
             <div className="flex justify-between gap-4">
               <button
                 onClick={prevStep}
-                className="w-1/2 bg-gray-300 py-2 rounded-md">
+                className="w-1/2 bg-grey300 font-AvertaStdBold text-base2 py-2 rounded-md">
                 Back
               </button>
               <button
                 onClick={nextStep}
-                className="w-1/2 bg-primary text-white py-2 rounded-md">
+                className="w-1/2 bg-red text-white font-AvertaStdBold   py-2 rounded-md">
                 Next
               </button>
             </div>
@@ -204,12 +286,12 @@ const SignUp = () => {
             <div className="flex justify-between gap-4">
               <button
                 onClick={prevStep}
-                className="w-1/2 bg-gray-300 py-2 rounded-md">
+                className="w-1/2 bg-grey300 font-AvertaStdBold text-base2 py-2 rounded-md">
                 Back
               </button>
               <button
                 onClick={handleSubmit}
-                className="w-1/2 bg-primary text-white py-2 rounded-md">
+                className="w-1/2 bg-red font-AvertaStdBold text-white py-2 rounded-md">
                 Submit
               </button>
             </div>
@@ -222,9 +304,9 @@ const SignUp = () => {
 
   return (
     <Dialog
-      open={isOpen}
+      open={true}
       onClose={handleClose}
-      className="fixed inset-0 z-10 overflow-y-auto">
+      className="fixed inset-0 z-20 overflow-y-auto">
       <div className="flex min-h-full items-center justify-center text-center pt-32">
         <Dialog.Panel className="relative w-full lg:max-w-5xl mx-auto bg-white rounded-xl shadow-xl">
           <div className="lg:flex w-full">
@@ -237,7 +319,7 @@ const SignUp = () => {
               <h3 className="text-white text-6xl font-semibold pb-4">
                 Welcome
               </h3>
-              <p className="text-gray-50 text-sm w-56 text-center">
+              <p className="text-base1 text-sl w-56 text-center">
                 Welcome to the signup screen, just enter the details and enjoy
                 your order
               </p>
@@ -263,9 +345,11 @@ const SignUp = () => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 {renderStep()}
               </form>
-              <div className="text-center text-sm mt-6">
+              <div className="text-center font-AvertaStdRegular text-sm mt-6">
                 Already have an account?{" "}
-                <a className="text-red cursor-pointer">Login</a>
+                <a className="text-red font-AvertaStdBold cursor-pointer">
+                  Login
+                </a>
               </div>
             </div>
           </div>

@@ -3,18 +3,26 @@ import React, { useState } from "react";
 const Friesadd = ({ onClose, onAddToCart }) => {
   const [quantity, setQuantity] = useState(1);
   const [variation, setVariation] = useState("Regular");
+  const [addon, setAddon] = useState("");
+  const [comment, setComment] = useState("");
 
   const increaseQty = () => setQuantity((prev) => prev + 1);
   const decreaseQty = () => setQuantity((prev) => (prev > 1 ? prev - 1 : prev));
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    const basePrice = 3.7;
+    const mealPrice = addon ? 1.0 : 0;
+    const totalPrice = basePrice + mealPrice;
+
     onAddToCart({
-      name: "Classic Loaded",
-      price: 4.99,
+      name: "1PC Fried Meal",
+      price: totalPrice,
       quantity,
       variation,
+      addon: String(addon || "").trim(),
+      comment: comment.trim(),
     });
+
     onClose();
   };
 
@@ -34,10 +42,10 @@ const Friesadd = ({ onClose, onAddToCart }) => {
           {/* Item Details */}
           <div className="flex justify-between items-center py-3">
             <h5 className="text-cgreen-500 font-Avertastd capitalize">
-              Classic Loaded
+              1-PC's Fried Chicken With Meal
             </h5>
             <h5 className="text-cgreen-500 font-Avertastd capitalize">
-              <span className="px-1">£</span>4.99
+              <span className="px-1">£</span>3.70
             </h5>
           </div>
 
@@ -46,59 +54,308 @@ const Friesadd = ({ onClose, onAddToCart }) => {
             <p className="text-lg text-red font-Avertastd capitalize pb-2">
               Variations
             </p>
-            <div className="bg-gray-300 rounded-md p-2 max-h-40 overflow-auto flex flex-col gap-2">
-              {/* Regular Option */}
+
+            <div
+              className="bg-grey300 rounded-md p-2 max-h-40 overflow-auto flex flex-col gap-2"
+              style={{
+                overflow: "auto",
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+              }}>
+              {/* Option */}
               <div
                 className="flex items-center justify-between p-1 gap-2 cursor-pointer"
-                onClick={() => setVariation("Regular")}>
+                onClick={() => setVariation("Pepsi")}>
                 <div className="flex items-center gap-2">
                   <label
                     className={`${
-                      variation === "Regular" ? "bg-red" : "bg-gray-200"
+                      variation === "Pepsi" ? "bg-red" : "bg-gray200"
                     } relative flex items-center justify-center h-6 w-6 rounded-full cursor-pointer`}>
-                    {variation === "Regular" && (
-                      <span className="absolute inset-0 m-auto w-3 h-3 bg-white rounded-full transition-transform duration-200"></span>
+                    {variation === "Pepsi" && (
+                      <span className="absolute inset-0 m-auto w-3 h-3 bg-white rounded-full  transition-transform duration-200"></span>
                     )}
                   </label>
-                  <p className="text-cgreen-500 font-Avertastd text-sm capitalize">
-                    Regular
+                  <p className="text-cgreen-500 font-AvertaStdBold text-sl capitalize">
+                    Pepsi
                   </p>
                 </div>
-                <p className="text-cgreen-500 font-Avertastd text-sm capitalize">
-                  £3.99
-                </p>
               </div>
 
-              {/* Large Option */}
+              {/* Option */}
               <div
                 className="flex items-center justify-between p-1 gap-2 cursor-pointer"
-                onClick={() => setVariation("Large")}>
+                onClick={() => setVariation("Pepsi Max")}>
                 <div className="flex items-center gap-2">
                   <label
                     className={`${
-                      variation === "Large" ? "bg-red" : "bg-gray-200"
+                      variation === "Pepsi Max" ? "bg-red" : "bg-gray-200"
                     } relative flex items-center justify-center h-6 w-6 rounded-full cursor-pointer`}>
-                    {variation === "Large" && (
+                    {variation === "Pepsi Max" && (
                       <span className="absolute inset-0 m-auto w-3 h-3 bg-white rounded-full transition-transform duration-200"></span>
                     )}
                   </label>
-                  <p className="text-black font-AvertastdRegular text-sm capitalize">
-                    Large
+                  <p className="text-black font-AvertaStdBold text-sl  capitalize">
+                    Pepsi Max
                   </p>
                 </div>
-                <p className="text-black font-AvertastdRegular text-sm capitalize">
-                  £3.99
-                </p>
+              </div>
+              <div
+                className="flex items-center justify-between p-1 gap-2 cursor-pointer"
+                onClick={() => setVariation("Diet Pepsi ")}>
+                <div className="flex items-center gap-2">
+                  <label
+                    className={`${
+                      variation === "Diet Pepsi " ? "bg-red" : "bg-gray200"
+                    } relative flex items-center justify-center h-6 w-6 rounded-full cursor-pointer`}>
+                    {variation === "Diet Pepsi " && (
+                      <span className="absolute inset-0 m-auto w-3 h-3 bg-white rounded-full  transition-transform duration-200"></span>
+                    )}
+                  </label>
+                  <p className="text-cgreen-500 font-AvertaStdBold text-sl capitalize">
+                    Diet Pepsi
+                  </p>
+                </div>
+              </div>
+              <div
+                className="flex items-center justify-between p-1 gap-2 cursor-pointer"
+                onClick={() => setVariation("Tango Orange")}>
+                <div className="flex items-center gap-2">
+                  <label
+                    className={`${
+                      variation === "Tango Orange" ? "bg-red" : "bg-gray200"
+                    } relative flex items-center justify-center h-6 w-6 rounded-full cursor-pointer`}>
+                    {variation === "Tango Orange" && (
+                      <span className="absolute inset-0 m-auto w-3 h-3 bg-white rounded-full  transition-transform duration-200"></span>
+                    )}
+                  </label>
+                  <p className="text-cgreen-500 font-AvertaStdBold text-sl capitalize">
+                    Tango Orange
+                  </p>
+                </div>
+              </div>
+              <div
+                className="flex items-center justify-between p-1 gap-2 cursor-pointer"
+                onClick={() => setVariation("Tango Orange")}>
+                <div className="flex items-center gap-2">
+                  <label
+                    className={`${
+                      variation === "Tango Orange" ? "bg-red" : "bg-gray200"
+                    } relative flex items-center justify-center h-6 w-6 rounded-full cursor-pointer`}>
+                    {variation === "Tango Orange" && (
+                      <span className="absolute inset-0 m-auto w-3 h-3 bg-white rounded-full  transition-transform duration-200"></span>
+                    )}
+                  </label>
+                  <p className="text-cgreen-500 font-AvertaStdBold text-sl capitalize">
+                    Tango Orange
+                  </p>
+                </div>
+              </div>
+              <div
+                className="flex items-center justify-between p-1 gap-2 cursor-pointer"
+                onClick={() => setVariation("Tango Apple")}>
+                <div className="flex items-center gap-2">
+                  <label
+                    className={`${
+                      variation === "Tango Apple" ? "bg-red" : "bg-gray200"
+                    } relative flex items-center justify-center h-6 w-6 rounded-full cursor-pointer`}>
+                    {variation === "Tango Apple" && (
+                      <span className="absolute inset-0 m-auto w-3 h-3 bg-white rounded-full  transition-transform duration-200"></span>
+                    )}
+                  </label>
+                  <p className="text-cgreen-500 font-AvertaStdBold text-sl capitalize">
+                    Tango Apple
+                  </p>
+                </div>
+              </div>
+              <div
+                className="flex items-center justify-between p-1 gap-2 cursor-pointer"
+                onClick={() => setVariation("Mirinda")}>
+                <div className="flex items-center gap-2">
+                  <label
+                    className={`${
+                      variation === "Mirinda" ? "bg-red" : "bg-gray200"
+                    } relative flex items-center justify-center h-6 w-6 rounded-full cursor-pointer`}>
+                    {variation === "Mirinda" && (
+                      <span className="absolute inset-0 m-auto w-3 h-3 bg-white rounded-full  transition-transform duration-200"></span>
+                    )}
+                  </label>
+                  <p className="text-cgreen-500 font-AvertaStdBold text-sl capitalize">
+                    Mirinda
+                  </p>
+                </div>
+              </div>
+              <div
+                className="flex items-center justify-between p-1 gap-2 cursor-pointer"
+                onClick={() => setVariation("Strawberry")}>
+                <div className="flex items-center gap-2">
+                  <label
+                    className={`${
+                      variation === "Strawberry" ? "bg-red" : "bg-gray200"
+                    } relative flex items-center justify-center h-6 w-6 rounded-full cursor-pointer`}>
+                    {variation === "Strawberry" && (
+                      <span className="absolute inset-0 m-auto w-3 h-3 bg-white rounded-full  transition-transform duration-200"></span>
+                    )}
+                  </label>
+                  <p className="text-cgreen-500 font-AvertaStdBold text-sl capitalize">
+                    Strawberry
+                  </p>
+                </div>
+              </div>
+              <div
+                className="flex items-center justify-between p-1 gap-2 cursor-pointer"
+                onClick={() => setVariation("7UP")}>
+                <div className="flex items-center gap-2">
+                  <label
+                    className={`${
+                      variation === "7UP" ? "bg-red" : "bg-gray200"
+                    } relative flex items-center justify-center h-6 w-6 rounded-full cursor-pointer`}>
+                    {variation === "7UP" && (
+                      <span className="absolute inset-0 m-auto w-3 h-3 bg-white rounded-full  transition-transform duration-200"></span>
+                    )}
+                  </label>
+                  <p className="text-cgreen-500 font-AvertaStdBold text-sl capitalize">
+                    7UP
+                  </p>
+                </div>
+              </div>
+              <div
+                className="flex items-center justify-between p-1 gap-2 cursor-pointer"
+                onClick={() => setVariation("Rubicon Mango")}>
+                <div className="flex items-center gap-2">
+                  <label
+                    className={`${
+                      variation === "Rubicon Mango" ? "bg-red" : "bg-gray200"
+                    } relative flex items-center justify-center h-6 w-6 rounded-full cursor-pointer`}>
+                    {variation === "Rubicon Mango" && (
+                      <span className="absolute inset-0 m-auto w-3 h-3 bg-white rounded-full  transition-transform duration-200"></span>
+                    )}
+                  </label>
+                  <p className="text-cgreen-500 font-AvertaStdBold text-sl capitalize">
+                    Rubicon Mango
+                  </p>
+                </div>
+              </div>
+              <div
+                className="flex items-center justify-between p-1 gap-2 cursor-pointer"
+                onClick={() => setVariation("Water Bottle")}>
+                <div className="flex items-center gap-2">
+                  <label
+                    className={`${
+                      variation === "Water Bottle" ? "bg-red" : "bg-gray200"
+                    } relative flex items-center justify-center h-6 w-6 rounded-full cursor-pointer`}>
+                    {variation === "Water Bottle" && (
+                      <span className="absolute inset-0 m-auto w-3 h-3 bg-white rounded-full  transition-transform duration-200"></span>
+                    )}
+                  </label>
+                  <p className="text-cgreen-500 font-AvertaStdBold text-sl capitalize">
+                    Water Bottle
+                  </p>
+                </div>
+              </div>
+              <div
+                className="flex items-center justify-between p-1 gap-2 cursor-pointer"
+                onClick={() => setVariation("Fruit Shoot")}>
+                <div className="flex items-center gap-2">
+                  <label
+                    className={`${
+                      variation === "Fruit Shoot" ? "bg-red" : "bg-gray200"
+                    } relative flex items-center justify-center h-6 w-6 rounded-full cursor-pointer`}>
+                    {variation === "Fruit Shoot" && (
+                      <span className="absolute inset-0 m-auto w-3 h-3 bg-white rounded-full  transition-transform duration-200"></span>
+                    )}
+                  </label>
+                  <p className="text-cgreen-500 font-AvertaStdBold text-sl capitalize">
+                    Fruit Shoot
+                  </p>
+                </div>
+              </div>
+              <div
+                className="flex items-center justify-between p-1 gap-2 cursor-pointer"
+                onClick={() => setVariation("1.5 Pepsi")}>
+                <div className="flex items-center gap-2">
+                  <label
+                    className={`${
+                      variation === "1.5 Pepsi" ? "bg-red" : "bg-gray200"
+                    } relative flex items-center justify-center h-6 w-6 rounded-full cursor-pointer`}>
+                    {variation === "1.5 Pepsi" && (
+                      <span className="absolute inset-0 m-auto w-3 h-3 bg-white rounded-full  transition-transform duration-200"></span>
+                    )}
+                  </label>
+                  <p className="text-cgreen-500 font-AvertaStdBold text-sl capitalize">
+                    1.5 Pepsi
+                  </p>
+                </div>
+              </div>
+              <div
+                className="flex items-center justify-between p-1 gap-2 cursor-pointer"
+                onClick={() => setVariation("1.5 7UP")}>
+                <div className="flex items-center gap-2">
+                  <label
+                    className={`${
+                      variation === "1.5 7UP" ? "bg-red" : "bg-gray200"
+                    } relative flex items-center justify-center h-6 w-6 rounded-full cursor-pointer`}>
+                    {variation === "1.5 7UP" && (
+                      <span className="absolute inset-0 m-auto w-3 h-3 bg-white rounded-full  transition-transform duration-200"></span>
+                    )}
+                  </label>
+                  <p className="text-cgreen-500 font-AvertaStdBold text-sl capitalize">
+                    1.5 7UP
+                  </p>
+                </div>
+              </div>
+              <div
+                className="flex items-center justify-between p-1 gap-2 cursor-pointer"
+                onClick={() => setVariation("1.5 Tango Orange")}>
+                <div className="flex items-center gap-2">
+                  <label
+                    className={`${
+                      variation === "1.5 Tango Orange" ? "bg-red" : "bg-gray200"
+                    } relative flex items-center justify-center h-6 w-6 rounded-full cursor-pointer`}>
+                    {variation === "1.5 Tango Orange" && (
+                      <span className="absolute inset-0 m-auto w-3 h-3 bg-white rounded-full  transition-transform duration-200"></span>
+                    )}
+                  </label>
+                  <p className="text-cgreen-500 font-AvertaStdBold text-sl capitalize">
+                    1.5 Tango Orange
+                  </p>
+                </div>
               </div>
             </div>
           </div>
+          <div class="flex items-center justify-between gap-3 my-2">
+            <div class="flex items-center gap-3">
+              <input
+                type="checkbox"
+                id="option-check"
+                value="Fries"
+                className="w-5 h-5 rounded-s-xl"
+                checked={addon === "Fries"}
+                onChange={(e) => {
+                  setAddon(e.target.checked ? e.target.value : "");
+                }}
+              />
 
+              <label
+                for="option-check"
+                class="font-AvertaStdBold text-lg cursor-pointer">
+                Fries
+              </label>
+            </div>
+            <label
+              for="option-check"
+              class="font-AvertaStdBold  text-lg cursor-pointer">
+              £ 1.00
+            </label>
+          </div>
           {/* Comment Box */}
           <div className="mt-4">
             <textarea
               name="comment"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
               placeholder="Enter your extra comment on item"
-              className="w-full px-3 py-2 border border-cgray-600 bg-cwhite-primary text-cgreen-200 rounded-md text-sm font-AvertastdRegular focus:outline-none"></textarea>
+              className="w-full px-3 py-2 border border-cgray-600 bg-cwhite-primary text-cgreen-200 rounded-md text-sm font-AvertastdRegular focus:outline-none"
+            />
           </div>
 
           {/* Quantity Controls */}

@@ -2,9 +2,13 @@ const About = () => {
   return (
     <section
       className="two-column relative bg-cover bg-no-repeat bg-center"
-      style={{ backgroundImage: 'url("/images/Group.jpg")' }}>
+      style={{ backgroundImage: 'url("/images/Texture-White1.png")' }}>
       <div className="w-full ">
-        <img className="w-full" src="/images/Texture-dark.png" alt="Overlay" />
+        <img
+          className="w-full"
+          src="/images/Texture-White1.png"
+          alt="Overlay"
+        />
       </div>
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
@@ -44,17 +48,17 @@ const About = () => {
           </div>
           <div className="order-2 lg:order-none">
             <div className="mb-3">
-              <div className="text-base text-red font-['Merienda'] capitalize font-normal">
+              <div className=" text-red text-4xl font-AvertaStdBlack capitalize font-normal">
                 About Roasto & More
               </div>
             </div>
             <div className="mb-3">
-              <h2 className="text-white font-MazzardhBold text-6xl">
+              <h2 className="text-base2 font-MazzardhBold text-6xl">
                 Unique and Authentic Choices
               </h2>
             </div>
             <div>
-              <p className="text-white leading-relaxed">
+              <p className="text-base2 font-AvertaStdRegular leading-relaxed">
                 Welcome to Roasto & More, your haven for mouthwatering comfort
                 food and Unique and Authentic Choices in Kempston. Indulge in
                 our Classic Original Chicken Shawarma, plus burgers and wraps
@@ -68,7 +72,7 @@ const About = () => {
             <div className="mt-8 md:mt-12 flex items-center">
               <a
                 className="cta text-base text-white bg-red font-semibold capitalize px-7 py-3 rounded-sm2 text-center transition-all duration-100"
-                href="/#">
+                href="/home">
                 About us
               </a>
             </div>

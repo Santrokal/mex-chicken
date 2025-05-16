@@ -16,7 +16,7 @@ const Navbar = () => {
           <div className="container mx-auto px-4">
             <div className="flex justify-between items-center">
               <div className="flex items-center flex-1">
-                <a href="/">
+                <a href="/home">
                   <img
                     src="/images/mex-chicken.png"
                     alt="website-logo"
@@ -36,16 +36,22 @@ const Navbar = () => {
                       "Order Now",
                       "Contact",
                       "Reservation",
-                    ].map((item, i) => (
-                      <a
-                        key={i}
-                        className={`text-base2 font-Avertastd ${
-                          item === "Home" ? "" : ""
-                        } hover:text-red`}
-                        href={item === "Order Now" ? "/order" : "/#"}>
-                        {item}
-                      </a>
-                    ))}
+                    ].map((item, i) => {
+                      let href = "/#";
+                      if (item === "Home") href = "/home";
+                      else if (item === "About") href = "/about";
+                      else if (item === "Order Now") href = "/order";
+                      else if (item === "Contact") href = "/contact";
+                      else if (item === "Reservation") href = "/reservation";
+                      return (
+                        <a
+                          key={i}
+                          className="text-base2 font-Avertastd hover:text-red"
+                          href={href}>
+                          {item}
+                        </a>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -123,7 +129,7 @@ const Navbar = () => {
         }`}
         style={{ boxShadow: "rgba(0, 0, 0, 0.05) 0px 7px 10px 0px" }}>
         <div className="py-4 px-5 flex justify-between items-center">
-          <a href="/">
+          <a href="/home">
             <img
               src="/images/fav-Dark.png"
               alt="website-logo"
@@ -180,8 +186,11 @@ const Navbar = () => {
                 </svg>
               </div>
             </a>
-            <div className="w-12 h-12 rounded-full bg-cgray-50 flex justify-center items-center cursor-pointer">
+            <div
+              className="w-12 h-12 rounded-full bg-cgray-50 flex justify-center items-center cursor-pointer"
+              onClick={() => setShowLogin((prev) => !prev)}>
               <img src="/images/user.png" alt="User" className="w-8 h-8" />
+              {showLogin && <Login />}
             </div>
           </div>
         </div>

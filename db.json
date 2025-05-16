@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "id": "eaa3",
+      "email": "",
+      "password": "",
+      "confirmPassword": "",
+      "firstName": "",
+      "lastName": "",
+      "phone": "",
+      "country": "",
+      "state": "",
+      "city": "",
+      "postcode": "",
+      "address": ""
+    }
+  ]
+}

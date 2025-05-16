@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-const AddtoCartInfo = ({ onClose, onAddToCart }) => {
+const ClassicBurger = ({ onClose, onAddToCart }) => {
   const [quantity, setQuantity] = useState(1);
-  const [variation, setVariation] = useState("wrap");
+  const [variation, setVariation] = useState("Spicy");
   const [comment, setComment] = useState("");
 
   const increaseQty = () => setQuantity((prev) => prev + 1);
@@ -11,7 +11,7 @@ const AddtoCartInfo = ({ onClose, onAddToCart }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onAddToCart({
-      name: "Classic Shawarma",
+      name: "Classic Burger",
       price: 3.99,
       quantity,
       variation,
@@ -36,7 +36,7 @@ const AddtoCartInfo = ({ onClose, onAddToCart }) => {
           {/* Item Details */}
           <div className="flex justify-between items-center py-3">
             <h5 className="text-cgreen-500 font-Avertastd capitalize">
-              Classic Shawarma
+              Classic Burger
             </h5>
             <h5 className="text-cgreen-500 font-Avertastd capitalize">
               <span className="px-1">£</span>3.99
@@ -48,47 +48,53 @@ const AddtoCartInfo = ({ onClose, onAddToCart }) => {
             <p className="text-lg text-red font-Avertastd capitalize pb-2">
               Variations
             </p>
-            <div className="bg-gray-300 rounded-md p-2 max-h-40 overflow-auto flex flex-col gap-2">
-              {/* Wrap Option */}
+            <div
+              className="bg-grey300 rounded-md p-2 max-h-40 overflow-auto flex flex-col gap-2"
+              style={{
+                overflow: "auto",
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+              }}>
+              {/* Spicy Option */}
               <div
                 className="flex items-center justify-between p-1 gap-2 cursor-pointer"
-                onClick={() => setVariation("wrap")}>
+                onClick={() => setVariation("Spicy")}>
                 <div className="flex items-center gap-2">
                   <label
                     className={`${
-                      variation === "wrap" ? "bg-red" : "bg-gray-200"
+                      variation === "Spicy" ? "bg-red" : "bg-gray200"
                     } relative flex items-center justify-center h-6 w-6 rounded-full cursor-pointer`}>
-                    {variation === "wrap" && (
-                      <span className="absolute inset-0 m-auto w-3 h-3 bg-white rounded-full transition-transform duration-200"></span>
+                    {variation === "Spicy" && (
+                      <span className="absolute inset-0 m-auto w-3 h-3 bg-white rounded-full  transition-transform duration-200"></span>
                     )}
                   </label>
-                  <p className="text-cgreen-500 font-Avertastd text-sm capitalize">
-                    Wrap
+                  <p className="text-cgreen-500 font-AvertaStdBold text-sl capitalize">
+                    Spicy
                   </p>
                 </div>
-                <p className="text-cgreen-500 font-Avertastd text-sm capitalize">
+                <p className="text-cgreen-500 font-AvertaStdBold text-sl  capitalize">
                   £3.99
                 </p>
               </div>
 
-              {/* Bun Option */}
+              {/* Non-Spicy Option */}
               <div
                 className="flex items-center justify-between p-1 gap-2 cursor-pointer"
-                onClick={() => setVariation("bun")}>
+                onClick={() => setVariation("Non-Spicy")}>
                 <div className="flex items-center gap-2">
                   <label
                     className={`${
-                      variation === "bun" ? "bg-red" : "bg-gray-200"
+                      variation === "Non-Spicy" ? "bg-red" : "bg-gray-200"
                     } relative flex items-center justify-center h-6 w-6 rounded-full cursor-pointer`}>
-                    {variation === "bun" && (
+                    {variation === "Non-Spicy" && (
                       <span className="absolute inset-0 m-auto w-3 h-3 bg-white rounded-full transition-transform duration-200"></span>
                     )}
                   </label>
-                  <p className="text-black font-AvertastdRegular text-sm capitalize">
-                    Bun
+                  <p className="text-black font-AvertaStdBold text-sl  capitalize">
+                    Non-Spicy
                   </p>
                 </div>
-                <p className="text-black font-AvertastdRegular text-sm capitalize">
+                <p className="text-black font-AvertaStdBold text-sl  capitalize">
                   £3.99
                 </p>
               </div>
@@ -105,7 +111,7 @@ const AddtoCartInfo = ({ onClose, onAddToCart }) => {
           />
 
           {/* Quantity Controls */}
-          <div className="product-quantity-actions my-4 w-3/4 mx-auto grid grid-cols-3 items-center divide-x divide-primary border border-primary rounded-md">
+          <div className="product-quantity-actions my-4 w-3/4 mx-auto grid grid-cols-3 items-center divide-x divide-red border-2 border-red rounded-md">
             <div
               className="add-quantity flex justify-center items-center cursor-pointer px-3 py-2"
               onClick={decreaseQty}>
@@ -135,4 +141,4 @@ const AddtoCartInfo = ({ onClose, onAddToCart }) => {
   );
 };
 
-export default AddtoCartInfo;
+export default ClassicBurger;

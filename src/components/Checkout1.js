@@ -467,6 +467,13 @@ const Checkout1 = () => {
                                 </div>
                               </div>
                             )}
+                            {item.addon && (
+                              <div className="mt-2.5 flex flex-col gap-1 w-full">
+                                <div className="text-xs text-gray-500 font-AvertaStdRegular">
+                                  Addon: {item.addon}
+                                </div>
+                              </div>
+                            )}
                           </div>
                         ))}
                       </div>

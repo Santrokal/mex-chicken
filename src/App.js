@@ -9,7 +9,7 @@ function App() {
     <OrderProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/order" element={<OrderNow />} />
           <Route path="/CheckOut" element={<CheckOut />} />
         </Routes>
