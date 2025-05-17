@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
-import SignUp from "../components/SignUp";
+import SignUp from "./SignUp";
+import { useAuth } from "./AuthContext";
 
-const Login = () => {
+const Login = ({ onClose, onLoginSuccess }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [error, setError] = useState("");
   const [showSignUp, setShowSignUp] = useState(false);
   const navigate = useNavigate();
 
+  const { login } = useAuth();
   const [formLogin, setFormLogin] = useState({
     email_address: "",
     password: "",
@@ -16,7 +18,7 @@ const Login = () => {
 
   const handleClose = () => {
     setIsOpen(false);
-    navigate("/home");
+    if (onClose) onClose();
   };
 
   const isValidEmail = (email) => {
@@ -58,8 +60,10 @@ const Login = () => {
       );
 
       if (user) {
-        navigate("/home");
+        login(user);
         setIsOpen(false);
+        if (onLoginSuccess) onLoginSuccess(user);
+        navigate("/home");
       } else {
         setError("Incorrect email or password. Please sign up.");
       }
@@ -184,6 +188,7 @@ const Login = () => {
           </Dialog.Panel>
         </div>
       </Dialog>
+
       {showSignUp && (
         <SignUp
           onClose={() => {

@@ -11,7 +11,6 @@ const ChangePopup = ({ onClose }) => {
     setPostcode,
   } = useOrder();
 
-  // Local state to stage changes
   const [localOrderType, setLocalOrderType] = useState(globalOrderType);
   const [localPickupTime, setLocalPickupTime] = useState(globalPickupTime);
   const [localPostcode, setLocalPostcode] = useState(globalPostcode);
@@ -78,7 +77,6 @@ const ChangePopup = ({ onClose }) => {
     onClose();
   };
 
-  // Handle Change button click to apply staged changes
   const handleChange = () => {
     setOrderType(localOrderType);
     setPickupTime(localPickupTime);
@@ -87,7 +85,7 @@ const ChangePopup = ({ onClose }) => {
       localOrderType === "delivery" &&
       !validDeliveryPostcodes.includes(localPostcode.trim().toUpperCase())
     ) {
-      setPostcode(""); // Reset postcode if invalid
+      setPostcode("");
     }
     onClose();
   };

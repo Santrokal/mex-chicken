@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable jsx-a11y/no-redundant-roles */
+import React, { useState, useEffect } from "react";
 import GuestDetailsForm from "./GuestDetailsForm";
 import PersonalDetailsForm from "./PersonalDetailsForm";
 import ReturningCustomerForm from "./ReturningCustomerForm";
@@ -6,6 +7,8 @@ import FooterImage from "./FooterImage";
 import { useOrder } from "../components/OrderContext";
 import FooterSection from "./FooterSection";
 import ChangePopup from "./ChangePopup";
+import BillingDetailsForm from "./BillingDetailsForm";
+import { useAuth } from "./AuthContext";
 
 const Checkout1 = () => {
   const [showChangePopup, setShowChangePopup] = useState(false);
@@ -19,6 +22,8 @@ const Checkout1 = () => {
     orderInstructions,
     setOrderInstructions,
   } = useOrder();
+  const { user } = useAuth();
+  const isAuthenticated = !!(user && user.email);
 
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -27,6 +32,30 @@ const Checkout1 = () => {
   const handleDeleteItem = (index) => {
     setCartItems((prev) => prev.filter((_, i) => i !== index));
   };
+  useEffect(() => {
+    if (user && user.email) {
+      fetch(`http://localhost:8000/users?email=${user.email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.length > 0) {
+            const userData = data[0];
+            setFormData2({
+              first_name: userData.firstName || "",
+              last_name: userData.lastName || "",
+              mobile_number: userData.phone || "",
+              email_id: userData.email || "",
+              postcode: userData.postcode || "",
+              enter_address: userData.address || "",
+              street_name: userData.state || "",
+              city: userData.city || "",
+            });
+          }
+        })
+        .catch((err) =>
+          console.error("Failed to fetch user billing data:", err)
+        );
+    }
+  }, [user]);
 
   const [selectedTip, setSelectedTip] = useState("No Tip");
   const [customTip, setCustomTip] = useState("");
@@ -140,7 +169,7 @@ const Checkout1 = () => {
                     <div className="flex items-center space-x-2">
                       <a
                         className="text-base1 text-cgray-50 hover:text-red font-Avertastd capitalize"
-                        href="/">
+                        href="/home">
                         Home
                       </a>
                     </div>
@@ -246,27 +275,34 @@ const Checkout1 = () => {
                     )
                   )}
                 </div>
-
-                {selectedOption === 0 && (
-                  <GuestDetailsForm
+                {isAuthenticated ? (
+                  <BillingDetailsForm
                     formData2={formData2}
                     handleChange={handleChange}
                   />
+                ) : (
+                  <>
+                    {selectedOption === 0 && (
+                      <GuestDetailsForm
+                        formData2={formData2}
+                        handleChange={handleChange}
+                      />
+                    )}
+                    {selectedOption === 1 && (
+                      <ReturningCustomerForm
+                        formData1={formData1}
+                        handleChange={handleChange}
+                      />
+                    )}
+                    {selectedOption === 2 && (
+                      <PersonalDetailsForm
+                        formData={formData}
+                        handleChange={handleChange}
+                      />
+                    )}
+                  </>
                 )}
 
-                {selectedOption === 1 && (
-                  <ReturningCustomerForm
-                    formData1={formData1}
-                    handleChange={handleChange}
-                  />
-                )}
-
-                {selectedOption === 2 && (
-                  <PersonalDetailsForm
-                    formData={formData}
-                    handleChange={handleChange}
-                  />
-                )}
                 {/* Pickup Info */}
                 <div className="mt-5 w-full p-5 bg-white shadow-custom rounded-sm2 shadow-light-theme">
                   <div className="payment-type">

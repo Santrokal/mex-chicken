@@ -536,45 +536,40 @@ const Order1 = () => {
                           style={{
                             boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
                           }}>
-                          <div className="flex flex-wrap gap-4 items-center justify-between">
+                          <div className="flex gap-4 items-center justify-between">
+                            <div className="w-56 h-24 lg:w-56 lg:h-36">
+                              {/* Product Image */}
+                              <img
+                                src="/images/ClassicBurger.jpeg"
+                                loading="lazy"
+                                className="w-full h-full object-cover overflow-hidden rounded-md"
+                                alt="Classic Shawarma"
+                              />
+                            </div>
                             <div className="product-name w-full">
-                              <div className="flex flex-col sm:flex-row items-center bg-white shadow-custom rounded-lg p-3 gap-4 w-full">
-                                {/* Product Image */}
-                                <img
-                                  src="/images/ClassicBurger.jpeg"
-                                  loading="lazy"
-                                  className="w-96 h-32 object-cover overflow-hidden rounded-md"
-                                  alt="Classic Shawarma"
-                                />
-                                {/* Product Details */}
-                                <div className="flex flex-col flex-grow">
-                                  <div className="text-base text-black font-AvertaStdBold capitalize break-word">
-                                    Classic Burger
-                                  </div>
-                                  <br></br>
-                                  <p className="text-sm text-gray500 line-clamp-2">
-                                    Lorem Ipsum is simply dummy text of the
-                                    printing typeset industry. Lorem Ipsum has
-                                    been the industry's standard dummy text ever
-                                    since the 1500s
-                                  </p>
+                              {/* Product Details */}
+                              <div className="text-base text-black font-AvertaStdBold capitalize break-word">
+                                Classic Burger
+                              </div>
+                              <br></br>
+                              <p className="text-sm text-cblack-primary font-normal line-clamp-2 overflow-hidden text-ellipsis lg:overflow-visible lg:line-clamp-none  max-w-[160px] sm:max-w-none">
+                                Lorem Ipsum is simply dummy text of the printing
+                                typeset industry. Lorem Ipsum has been the
+                                industry's standard dummy text ever since the
+                                1500s
+                              </p>
 
-                                  {/* Price & Add Button */}
-                                  <div className="flex items-center justify-between mt-2">
-                                    <div className="flex items-center gap-2">
-                                      <span className="text-lg font-semibold text-black">
-                                        £3.99
-                                      </span>
-                                      <span className="text-lg text-gray500   line-through">
-                                        £5.00
-                                      </span>
-                                    </div>
-                                    <button
-                                      onClick={() => setShowClassicBurger(true)}
-                                      className="bg-red text-white px-8 py-2 rounded-md text-lg font-semibold hover:bg-red transition">
-                                      Add
-                                    </button>
-                                  </div>
+                              {/* Price & Add Button */}
+                              <div className="flex items-center justify-between mt-2">
+                                <span className="text-lg font-semibold text-black">
+                                  £3.99
+                                </span>
+                                <div className="product-action">
+                                  <button
+                                    onClick={() => setShowClassicBurger(true)}
+                                    className="bg-red text-white px-8 py-2 rounded-md text-lg font-semibold hover:bg-red transition">
+                                    Add
+                                  </button>
                                 </div>
                                 {/* Popup */}
                                 {showClassicBurger && (
@@ -593,47 +588,41 @@ const Order1 = () => {
                           style={{
                             boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
                           }}>
-                          <div className="flex flex-wrap gap-4 items-center justify-between">
+                          <div className="flex gap-4 items-center justify-between">
+                            <div className="w-56 h-24 lg:w-56 lg:h-36">
+                              {/* Product Image */}
+                              <img
+                                src="/images/mincedchickenburger.jpeg"
+                                loading="lazy"
+                                className="w-96 h-32 object-cover overflow-hidden rounded-md"
+                                alt="Classic Shawarma"
+                              />
+                            </div>
                             <div className="product-name w-full">
-                              <div className="flex flex-col sm:flex-row items-center bg-white shadow-custom rounded-lg p-3 gap-4 w-full">
-                                {/* Product Image */}
-                                <img
-                                  src="/images/mincedchickenburger.jpeg"
-                                  loading="lazy"
-                                  className="w-96 h-32 object-cover overflow-hidden rounded-md"
-                                  alt="Classic Shawarma"
-                                />
-                                {/* Product Details */}
-                                <div className="flex flex-col flex-grow">
-                                  <div className="text-base text-black font-AvertaStdBold capitalize break-word">
-                                    Minced Chicken Burger
-                                  </div>
-                                  <br></br>
-                                  <p className="text-sm text-gray500 line-clamp-2">
-                                    Lorem Ipsum is simply dummy text of the
-                                    printing typeset industry. Lorem Ipsum has
-                                    been the industry's standard dummy text ever
-                                    since the 1500s
-                                  </p>
-
-                                  {/* Price & Add Button */}
-                                  <div className="flex items-center justify-between mt-2">
-                                    <div className="flex items-center gap-2">
-                                      <span className="text-lg font-semibold text-black">
-                                        £4.49
-                                      </span>
-                                      <span className="text-lg text-gray500   line-through">
-                                        £6.00
-                                      </span>
-                                    </div>
-                                    <button
-                                      onClick={() =>
-                                        setShowMincedChickenBurger(true)
-                                      }
-                                      className="bg-red text-white px-8 py-2 rounded-md text-lg font-semibold hover:bg-red transition">
-                                      Add
-                                    </button>
-                                  </div>
+                              {/* Product Details */}
+                              <div className="text-base text-black font-AvertaStdBold capitalize break-word">
+                                Minced Chicken Burger
+                              </div>
+                              <br></br>
+                              <p className="text-sm text-cblack-primary font-normal line-clamp-2 overflow-hidden text-ellipsis lg:overflow-visible lg:line-clamp-none  max-w-[160px] sm:max-w-none">
+                                Lorem Ipsum is simply dummy text of the printing
+                                typeset industry. Lorem Ipsum has been the
+                                industry's standard dummy text ever since the
+                                1500s
+                              </p>
+                              {/* Price & Add Button */}
+                              <div className="flex items-center justify-between mt-2">
+                                <span className="text-lg font-semibold text-black">
+                                  £4.49
+                                </span>
+                                <div className="product-action">
+                                  <button
+                                    onClick={() =>
+                                      setShowMincedChickenBurger(true)
+                                    }
+                                    className="bg-red text-white px-8 py-2 rounded-md text-lg font-semibold hover:bg-red transition">
+                                    Add
+                                  </button>
                                 </div>
                                 {/* Popup */}
                                 {showMincedChickenBurger && (
@@ -648,50 +637,46 @@ const Order1 = () => {
                             </div>
                           </div>
                         </div>
+
                         <div
                           className="flex flex-col gap-1 p-2 lg:p-5 bg-white rounded-md"
                           style={{
                             boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
                           }}>
-                          <div className="flex flex-wrap gap-4 items-center justify-between">
+                          <div className="flex gap-4 items-center justify-between">
+                            <div className="w-56 h-24 lg:w-56 lg:h-36">
+                              {/* Product Image */}
+                              <img
+                                src="/images/veggieburger.jpeg"
+                                loading="lazy"
+                                className="w-96 h-32 object-cover overflow-hidden rounded-md"
+                                alt="Classic Shawarma"
+                              />
+                            </div>
                             <div className="product-name w-full">
-                              <div className="flex flex-col sm:flex-row items-center bg-white shadow-custom rounded-lg p-3 gap-4 w-full">
-                                {/* Product Image */}
-                                <img
-                                  src="/images/veggieburger.jpeg"
-                                  loading="lazy"
-                                  className="w-96 h-32 object-cover overflow-hidden rounded-md"
-                                  alt="Classic Shawarma"
-                                />
-                                {/* Product Details */}
-                                <div className="flex flex-col flex-grow">
-                                  <div className="text-base text-black font-AvertaStdBold capitalize break-word">
-                                    Veggie Burger
-                                  </div>
-                                  <br></br>
-                                  <p className="text-sm text-gray500 line-clamp-2">
-                                    Lorem Ipsum is simply dummy text of the
-                                    printing typeset industry. Lorem Ipsum has
-                                    been the industry's standard dummy text ever
-                                    since the 1500s
-                                  </p>
+                              {/* Product Details */}
+                              <div className="text-base text-black font-AvertaStdBold capitalize break-word">
+                                Veggie Burger
+                              </div>
+                              <br></br>
+                              <p className="text-sm text-cblack-primary font-normal line-clamp-2 overflow-hidden text-ellipsis lg:overflow-visible lg:line-clamp-none  max-w-[160px] sm:max-w-none">
+                                Lorem Ipsum is simply dummy text of the printing
+                                typeset industry. Lorem Ipsum has been the
+                                industry's standard dummy text ever since the
+                                1500s
+                              </p>
 
-                                  {/* Price & Add Button */}
-                                  <div className="flex items-center justify-between mt-2">
-                                    <div className="flex items-center gap-2">
-                                      <span className="text-lg font-semibold text-black">
-                                        £3.99
-                                      </span>
-                                      <span className="text-lg text-gray500   line-through">
-                                        £5.00
-                                      </span>
-                                    </div>
-                                    <button
-                                      onClick={() => setShowVeggieBurger(true)}
-                                      className="bg-red text-white px-8 py-2 rounded-md text-lg font-semibold hover:bg-red transition">
-                                      Add
-                                    </button>
-                                  </div>
+                              {/* Price & Add Button */}
+                              <div className="flex items-center justify-between mt-2">
+                                <span className="text-lg font-semibold text-black">
+                                  £3.99
+                                </span>
+                                <div className="product-action">
+                                  <button
+                                    onClick={() => setShowVeggieBurger(true)}
+                                    className="bg-red text-white px-8 py-2 rounded-md text-lg font-semibold hover:bg-red transition">
+                                    Add
+                                  </button>
                                 </div>
                                 {/* Popup */}
                                 {showVeggieBurger && (
@@ -709,47 +694,40 @@ const Order1 = () => {
                           style={{
                             boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
                           }}>
-                          <div className="flex flex-wrap gap-4 items-center justify-between">
+                          <div className="flex gap-4 items-center justify-between">
+                            <div className="w-56 h-24 lg:w-56 lg:h-36">
+                              {/* Product Image */}
+                              <img
+                                src="/images/halfpounderburger.jpeg"
+                                loading="lazy"
+                                className="w-96 h-32 object-cover overflow-hidden rounded-md"
+                                alt="Classic Shawarma"
+                              />
+                            </div>
                             <div className="product-name w-full">
-                              <div className="flex flex-col sm:flex-row items-center bg-white shadow-custom rounded-lg p-3 gap-4 w-full">
-                                {/* Product Image */}
-                                <img
-                                  src="/images/halfpounderburger.jpeg"
-                                  loading="lazy"
-                                  className="w-96 h-32 object-cover overflow-hidden rounded-md"
-                                  alt="Classic Shawarma"
-                                />
-                                {/* Product Details */}
-                                <div className="flex flex-col flex-grow">
-                                  <div className="text-base text-black font-AvertaStdBold capitalize break-word">
-                                    1/4 Pounder Burger
-                                  </div>
-                                  <br></br>
-                                  <p className="text-sm text-gray500 line-clamp-2">
-                                    Lorem Ipsum is simply dummy text of the
-                                    printing typeset industry. Lorem Ipsum has
-                                    been the industry's standard dummy text ever
-                                    since the 1500s
-                                  </p>
+                              {/* Product Details */}
+                              <div className="text-base text-black font-AvertaStdBold capitalize break-word">
+                                1/4 Pounder Burger
+                              </div>
+                              <br></br>
+                              <p className="text-sm text-cblack-primary font-normal line-clamp-2 overflow-hidden text-ellipsis lg:overflow-visible lg:line-clamp-none  max-w-[160px] sm:max-w-none">
+                                Lorem Ipsum is simply dummy text of the printing
+                                typeset industry. Lorem Ipsum has been the
+                                industry's standard dummy text ever since the
+                                1500s
+                              </p>
 
-                                  {/* Price & Add Button */}
-                                  <div className="flex items-center justify-between mt-2">
-                                    <div className="flex items-center gap-2">
-                                      <span className="text-lg font-semibold text-black">
-                                        £3.99
-                                      </span>
-                                      <span className="text-lg text-gray500   line-through">
-                                        £5.00
-                                      </span>
-                                    </div>
-                                    <button
-                                      onClick={() =>
-                                        setShowQuarterPounder(true)
-                                      }
-                                      className="bg-red text-white px-8 py-2 rounded-md text-lg font-semibold hover:bg-red transition">
-                                      Add
-                                    </button>
-                                  </div>
+                              {/* Price & Add Button */}
+                              <div className="flex items-center justify-between mt-2">
+                                <span className="text-lg font-semibold text-black">
+                                  £3.99
+                                </span>
+                                <div className="product-action">
+                                  <button
+                                    onClick={() => setShowQuarterPounder(true)}
+                                    className="bg-red text-white px-8 py-2 rounded-md text-lg font-semibold hover:bg-red transition">
+                                    Add
+                                  </button>
                                 </div>
                                 {/* Popup */}
                                 {showQuarterPounder && (
@@ -767,45 +745,40 @@ const Order1 = () => {
                           style={{
                             boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
                           }}>
-                          <div className="flex flex-wrap gap-4 items-center justify-between">
+                          <div className="flex gap-4 items-center justify-between">
+                            <div className="w-56 h-24 lg:w-56 lg:h-36">
+                              {/* Product Image */}
+                              <img
+                                src="/images/12halfpounderburger.jpeg"
+                                loading="lazy"
+                                className="w-96 h-32 object-cover overflow-hidden rounded-md"
+                                alt="Classic Shawarma"
+                              />
+                            </div>
                             <div className="product-name w-full">
-                              <div className="flex flex-col sm:flex-row items-center bg-white shadow-custom rounded-lg p-3 gap-4 w-full">
-                                {/* Product Image */}
-                                <img
-                                  src="/images/12halfpounderburger.jpeg"
-                                  loading="lazy"
-                                  className="w-96 h-32 object-cover overflow-hidden rounded-md"
-                                  alt="Classic Shawarma"
-                                />
-                                {/* Product Details */}
-                                <div className="flex flex-col flex-grow">
-                                  <div className="text-base text-black font-AvertaStdBold capitalize break-word">
-                                    1/2 Pounder Burger
-                                  </div>
-                                  <br></br>
-                                  <p className="text-sm text-gray500 line-clamp-2">
-                                    Lorem Ipsum is simply dummy text of the
-                                    printing typeset industry. Lorem Ipsum has
-                                    been the industry's standard dummy text ever
-                                    since the 1500s
-                                  </p>
+                              {/* Product Details */}
+                              <div className="text-base text-black font-AvertaStdBold capitalize break-word">
+                                1/2 Pounder Burger
+                              </div>
+                              <br></br>
+                              <p className="text-sm text-cblack-primary font-normal line-clamp-2 overflow-hidden text-ellipsis lg:overflow-visible lg:line-clamp-none  max-w-[160px] sm:max-w-none">
+                                Lorem Ipsum is simply dummy text of the printing
+                                typeset industry. Lorem Ipsum has been the
+                                industry's standard dummy text ever since the
+                                1500s
+                              </p>
 
-                                  {/* Price & Add Button */}
-                                  <div className="flex items-center justify-between mt-2">
-                                    <div className="flex items-center gap-2">
-                                      <span className="text-lg font-semibold text-black">
-                                        £5.49
-                                      </span>
-                                      <span className="text-lg text-gray500   line-through">
-                                        £7.00
-                                      </span>
-                                    </div>
-                                    <button
-                                      onClick={() => setShowHalfPounder(true)}
-                                      className="bg-red text-white px-8 py-2 rounded-md text-lg font-semibold hover:bg-red transition">
-                                      Add
-                                    </button>
-                                  </div>
+                              {/* Price & Add Button */}
+                              <div className="flex items-center justify-between mt-2">
+                                <span className="text-lg font-semibold text-black">
+                                  £5.49
+                                </span>
+                                <div className="product-action">
+                                  <button
+                                    onClick={() => setShowHalfPounder(true)}
+                                    className="bg-red text-white px-8 py-2 rounded-md text-lg font-semibold hover:bg-red transition">
+                                    Add
+                                  </button>
                                 </div>
                                 {/* Popup */}
                                 {showHalfPounder && (
@@ -1678,6 +1651,7 @@ const Order1 = () => {
                           show={showAlert}
                           onClose={() => setShowAlert(false)}
                         />
+                        ``
                       </div>
                     </div>
                   )}
