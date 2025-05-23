@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
-import Loader from "../components/Loader";
-import Order1 from "../components/Order1";
-import FooterImage from "../components/FooterImage";
-import FooterSection from "../components/FooterSection";
+import Navbar from "../components/Home/Navbar";
+import Loader from "../components/Home/Loader";
+import Order1 from "../components/Order/Order1";
+import FooterImage from "../components/Home/FooterImage";
+import FooterSection from "../components/Home/FooterSection";
 
 function OrderNow() {
   const [loading, setLoading] = useState(true);

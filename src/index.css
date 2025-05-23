@@ -9,7 +9,11 @@
 @import url("https://cdn-uicons.flaticon.com/2.6.0/uicons-brands/css/uicons-brands.css");
 @import url("https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-rounded/css/uicons-solid-rounded.css");
 @import url(https://db.onlinewebfonts.com/c/447315c0c330fd423c8e1cc18024669d?family=AvertaStd-Bold);
-
+@import url("https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-straight/css/uicons-regular-straight.css");
+@import url("https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-chubby/css/uicons-solid-chubby.css");
+@import url(https://db.onlinewebfonts.com/c/0517d63d569db662aad7974ae954adb8?family=Merienda+One);
+@import url("https://cdn-uicons.flaticon.com/2.7.0/uicons-regular-rounded/css/uicons-regular-rounded.css");
+@import url("https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-straight/css/uicons-regular-straight.css");
 /* MainSection.js */
 .hero-banner {
   min-height: 100vh;
@@ -217,10 +221,8 @@
 
 .home-section {
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: #000000;
-  height: 40vh;
+  height: 292px;
+  width: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;

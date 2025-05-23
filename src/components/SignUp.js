@@ -2,12 +2,14 @@
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
+import ErrorModal from "./ErrorModal";
 
 const SignUp = ({ onClose }) => {
-  console.log("SignUp component rendering");
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   const [formData, setFormData] = useState({
     email: "",
@@ -24,10 +26,15 @@ const SignUp = ({ onClose }) => {
   });
 
   const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
+
+    if (name === "phone") {
+      const numericValue = value.replace(/\D/g, "");
+      if (numericValue.length > 10) return;
+      setFormData((prev) => ({ ...prev, [name]: numericValue }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const nextStep = () => {
@@ -72,7 +79,6 @@ const SignUp = ({ onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("SignUp form submitted");
 
     for (let key in formData) {
       if (!formData[key]) {
@@ -90,37 +96,94 @@ const SignUp = ({ onClose }) => {
       setError("Please enter a valid email address");
       return;
     }
+
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
+      return;
+    }
+
+    if (!/^\d{10}$/.test(formData.phone)) {
+      setError("Phone number must be 10 digits");
       return;
     }
 
     setError("");
 
     try {
+      const res = await fetch("http://localhost:8000/users");
+      const existingUsers = await res.json();
+
+      const emailExists = existingUsers.some(
+        (user) => user.email === formData.email
+      );
+      const phoneExists = existingUsers.some(
+        (user) => user.phone === formData.phone
+      );
+
+      if (emailExists) {
+        setModalMessage("Email already exists");
+        setShowErrorModal(true);
+        return;
+      }
+
+      if (phoneExists) {
+        setModalMessage("Phone number already exists");
+        setShowErrorModal(true);
+        return;
+      }
+
+      const {
+        email,
+        password,
+        firstName,
+        lastName,
+        phone,
+        country,
+        state,
+        city,
+        postcode,
+        address,
+      } = formData;
+
+      const userToSave = {
+        email,
+        password,
+        firstName,
+        lastName,
+        phone,
+        addresses: [
+          {
+            country,
+            state,
+            city,
+            postcode,
+            address,
+          },
+        ],
+      };
+
       const response = await fetch("http://localhost:8000/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(userToSave),
       });
 
       if (!response.ok) {
         throw new Error("Failed to save user data");
       }
 
-      console.log("Successfully saved:", formData);
+      console.log("Successfully saved:", userToSave);
       onClose();
       navigate("/home");
     } catch (error) {
       console.error("Error saving data:", error);
-      alert("Failed to save user data. Please try again.");
+      setError("Failed to save user data. Please try again.");
     }
   };
 
   const handleClose = () => {
-    console.log("SignUp dialog closing via close button");
     onClose();
   };
 
@@ -219,7 +282,7 @@ const SignUp = ({ onClose }) => {
               </button>
               <button
                 onClick={nextStep}
-                className="w-1/2 bg-red text-white font-AvertaStdBold   py-2 rounded-md">
+                className="w-1/2 bg-red text-white font-AvertaStdBold py-2 rounded-md">
                 Next
               </button>
             </div>
@@ -294,6 +357,11 @@ const SignUp = ({ onClose }) => {
                 className="w-1/2 bg-red font-AvertaStdBold text-white py-2 rounded-md">
                 Submit
               </button>
+              <ErrorModal
+                show={showErrorModal}
+                onClose={() => setShowErrorModal(false)}
+                message={modalMessage}
+              />
             </div>
           </>
         );

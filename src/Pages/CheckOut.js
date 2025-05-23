@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
-import Loader from "../components/Loader";
+import Navbar from "../components/Home/Navbar";
+import Loader from "../components/Home/Loader";
 
-import Checkout1 from "../components/Checkout1";
+import Checkout1 from "../components/Checkout/Checkout1";
 
 function CheckOut() {
   const [loading, setLoading] = useState(true);

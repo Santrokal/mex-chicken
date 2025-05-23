@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
 import SignUp from "./SignUp";
-import { useAuth } from "./AuthContext";
-
+import { useAuth } from "./Checkout/AuthContext";
+import loginImg from "../images/loginside.png";
 const Login = ({ onClose, onLoginSuccess }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [error, setError] = useState("");
@@ -85,7 +85,7 @@ const Login = ({ onClose, onLoginSuccess }) => {
               <div
                 className="w-full lg:w-1/2 h-auto bg-gray-50 bg-center lg:bg-top"
                 style={{
-                  backgroundImage: 'url("/images/loginside.png")',
+                  backgroundImage: `url(${loginImg})`,
                   backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
                   backgroundColor: "black",
