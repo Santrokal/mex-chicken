@@ -83,7 +83,7 @@ const Friesadd = ({ open, product, onClose, onAddToCart }) => {
             <div className="mb-4">
               <p className="text-lg text-red font-Avertastd mb-2">Variations</p>
               <div
-                className="max-h-40 overflow-auto rounded-md bg-grey300 p-2 flex flex-col gap-2"
+                className="max-h-40 overflow-auto rounded-md bg-grey400 p-2 flex flex-col gap-2"
                 style={{
                   overflow: "auto",
                   scrollbarWidth: "none",

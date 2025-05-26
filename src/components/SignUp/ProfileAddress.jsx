@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import AddAdreess from "../components/Checkout/AddAdreess";
-import EditAddress from "./Checkout/EditAddress";
+import AddAdreess from "../Checkout/AddAdreess";
+import EditAddress from "../Checkout/EditAddress";
 
 const ProfileAddress = () => {
   const [addresses, setAddresses] = useState([]);

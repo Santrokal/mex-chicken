@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom"; // Correct imports
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Navbar from "../components/Home/Navbar";
-import Loader from "../components/Home/Loader";
-import FooterImage from "../components/Home/FooterImage";
-import FooterSection from "../components/Home/FooterSection";
+import Navbar from "../../components/Home/Navbar";
+import Loader from "../../components/Home/Loader";
+import FooterImage from "../../components/Home/FooterImage";
+import FooterSection from "../../components/Home/FooterSection";
 
 const OrderSuccess = () => {
   const [loading, setLoading] = useState(true);
-  const location = useLocation(); // Hook to access navigation state
-  const navigate = useNavigate(); // Hook to navigate programmatically
-  const orderId = location.state?.orderId || "N/A"; // Retrieve orderId from state, fallback to "N/A"
-
+  const location = useLocation();
+  const navigate = useNavigate();
+  const orderId = location.state?.orderId || "N/A";
   const handleCheckout = () => {
-    navigate("/home"); // Navigate to lowercase /home
+    navigate("/home");
   };
 
   useEffect(() => {

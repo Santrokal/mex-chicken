@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useOrder } from "../OrderContext";
+import { useOrder } from "../Order/OrderContext";
 import deliveryman from "../../images/delivery-man.svg";
 
 const ChangePopup = ({ onClose }) => {
@@ -8,16 +8,41 @@ const ChangePopup = ({ onClose }) => {
     setOrderType,
     pickupTime: globalPickupTime,
     setPickupTime,
-    postcode: globalPostcode,
+    postcode: postcode,
     setPostcode,
   } = useOrder();
 
   const [localOrderType, setLocalOrderType] = useState(globalOrderType);
   const [localPickupTime, setLocalPickupTime] = useState(globalPickupTime);
-  const [localPostcode, setLocalPostcode] = useState(globalPostcode);
+  const storedPostcode = localStorage.getItem("postcode");
+  if (storedPostcode) setPostcode(storedPostcode);
+
   const [timeOptions, setTimeOptions] = useState([]);
   const [isValid, setIsValid] = useState(null);
   const [submittedCode, setSubmittedCode] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem("postcode", postcode);
+  }, [postcode]);
+
+  const isValidWF10Postcode = (postcode) => {
+    const postcodeRegex = /^WF10\s?[0-9][A-Z]{2}$/i;
+    return postcodeRegex.test(postcode.trim());
+  };
+
+  const handleCheckDelivery = () => {
+    if (!postcode) {
+      setIsValid(false);
+      return;
+    }
+    if (isValidWF10Postcode(postcode)) {
+      setIsValid(true);
+      setSubmittedCode(postcode.trim().toUpperCase());
+    } else {
+      setIsValid(false);
+      setSubmittedCode("");
+    }
+  };
 
   useEffect(() => {
     const generatePickupTimes = () => {
@@ -49,30 +74,6 @@ const ChangePopup = ({ onClose }) => {
     setLocalPickupTime(e.target.value);
   };
 
-  const validDeliveryPostcodes = [
-    "EH21 6UU",
-    "EH22 1AA",
-    "EH23 3BB",
-    "EH24 4CC",
-    "EH25 5DD",
-    "EH26 6EE",
-    "EH27 7FF",
-    "EH28 8GG",
-    "EH29 9HH",
-    "EH30 0II",
-  ];
-
-  const handleCheckDelivery = () => {
-    const formatted = localPostcode.trim().toUpperCase();
-    if (validDeliveryPostcodes.includes(formatted)) {
-      setIsValid(true);
-      setSubmittedCode(formatted);
-    } else {
-      setIsValid(false);
-      setSubmittedCode("");
-    }
-  };
-
   const handleClosePopup = () => {
     setIsValid(null);
     onClose();
@@ -81,13 +82,8 @@ const ChangePopup = ({ onClose }) => {
   const handleChange = () => {
     setOrderType(localOrderType);
     setPickupTime(localPickupTime);
-    setPostcode(localPostcode);
-    if (
-      localOrderType === "delivery" &&
-      !validDeliveryPostcodes.includes(localPostcode.trim().toUpperCase())
-    ) {
-      setPostcode("");
-    }
+    localStorage.removeItem("postcode");
+
     onClose();
   };
 
@@ -189,8 +185,8 @@ const ChangePopup = ({ onClose }) => {
                 <input
                   type="text"
                   placeholder="Enter Your Postcode"
-                  value={localPostcode}
-                  onChange={(e) => setLocalPostcode(e.target.value)}
+                  value={postcode}
+                  onChange={(e) => setPostcode(e.target.value)}
                   className="border border-gray-300 p-3 w-full rounded-md mt-3"
                 />
               </div>

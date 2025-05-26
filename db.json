@@ -18,77 +18,318 @@
       "id": "1592",
       "email": "testing@gmail.com",
       "password": "123Testing",
-      "firstName": "SASASASSAASS",
-      "lastName": "Saa",
+      "firstName": "Testing",
+      "lastName": "Test",
       "phone": "1234567890",
       "addresses": [
         {
-          "country": "Testing",
-          "state": "Testing",
-          "city": "Testing",
-          "postcode": "Testing",
-          "address": "Testing"
+          "country": "England",
+          "state": "Yorkshire and The Humber",
+          "city": "Wakefield",
+          "postcode": "WF10 1AE",
+          "address": "Wakefield"
+        },
+        {
+          "country": "England",
+          "state": "Yorkshire and The Humber",
+          "city": "Castleford Central and Glasshoughton",
+          "postcode": "WF10 1AH",
+          "address": "Yorkshire "
+        },
+        {
+          "country": "England",
+          "state": "Yorkshire and The Humber",
+          "city": "Wakefield, unparished area",
+          "postcode": "WF10 1AQ",
+          "address": "Humber"
+        },
+        {
+          "country": "England",
+          "state": "East of England",
+          "city": "Kempston Central & East",
+          "postcode": "MK42 8DN",
+          "address": "Kempston "
         }
       ],
       "confirmPassword": "123Testing"
     }
   ],
   "orders": [
-    {},
     {
-      "id": "6c5e",
-      "orderId": "EZZY0001",
+      "id": "4d2d",
+      "orderId": "EZZY0007",
+      "userEmail": "testing@gmail.com",
+      "orderType": "delivery",
+      "pickupTime": null,
+      "postcode": "WF10 1BW",
+      "orderInstructions": "",
+      "cartItems": [
+        {
+          "name": "Mexicano",
+          "quantity": 1,
+          "price": 4.99,
+          "comment": "",
+          "addon": ""
+        }
+      ],
+      "subtotal": "4.99",
+      "tipAmount": "0.50",
+      "total": "5.49",
+      "paymentType": "Card",
+      "billingDetails": {
+        "first_name": "SASASASSAASS",
+        "last_name": "Saa",
+        "mobile_number": "1234567890",
+        "email_id": "testing@gmail.com",
+        "postcode": "WF10 1BP",
+        "enter_address": " Glasshoughton",
+        "street_name": "Yorkshire and The Humber",
+        "city": "Castleford Central and Glasshoughton"
+      },
+      "timestamp": "2025-05-23T10:59:26.902Z"
+    },
+    {
+      "id": "cbd1",
+      "orderId": "EZZY0008",
       "userEmail": "testing@gmail.com",
       "orderType": "pickup",
-      "pickupTime": "09:00 PM (Thursday)",
+      "pickupTime": "05:00 PM (Friday)",
+      "postcode": null,
+      "orderInstructions": "",
+      "cartItems": [
+        {
+          "name": "Mexicano",
+          "quantity": 1,
+          "price": 4.99,
+          "comment": "",
+          "addon": ""
+        }
+      ],
+      "subtotal": "4.99",
+      "tipAmount": "0.00",
+      "total": "4.99",
+      "paymentType": "Cash",
+      "billingDetails": {
+        "first_name": "SASASASSAASS",
+        "last_name": "Saa",
+        "mobile_number": "1234567890",
+        "email_id": "testing@gmail.com",
+        "postcode": "WF10 1BP",
+        "enter_address": " Glasshoughton",
+        "street_name": "Yorkshire and The Humber",
+        "city": "Castleford Central and Glasshoughton"
+      },
+      "timestamp": "2025-05-23T11:03:17.399Z"
+    },
+    {
+      "id": "defd",
+      "orderId": "EZZY0009",
+      "userEmail": "testing@gmail.com",
+      "orderType": "pickup",
+      "pickupTime": "06:00 PM (Friday)",
+      "postcode": null,
+      "orderInstructions": "",
+      "cartItems": [
+        {
+          "name": " 3PC Boneless Strips Meals Comes with Chips & Fruit Shoot",
+          "variation": "1.5 Tango Orange",
+          "quantity": 1,
+          "price": 4.99,
+          "comment": "",
+          "addon": ""
+        }
+      ],
+      "subtotal": "4.99",
+      "tipAmount": "0.00",
+      "total": "4.99",
+      "paymentType": "Cash",
+      "billingDetails": {
+        "first_name": "SASASASSAASS",
+        "last_name": "Saa",
+        "mobile_number": "1234567890",
+        "email_id": "testing@gmail.com",
+        "postcode": "WF10 1BP",
+        "enter_address": " Glasshoughton",
+        "street_name": "Yorkshire and The Humber",
+        "city": "Castleford Central and Glasshoughton"
+      },
+      "timestamp": "2025-05-23T11:49:49.894Z"
+    },
+    {
+      "id": "fca7",
+      "orderId": "EZZY0010",
+      "userEmail": "testing@gmail.com",
+      "orderType": "pickup",
+      "pickupTime": "06:00 PM (Friday)",
+      "postcode": null,
+      "orderInstructions": "",
+      "cartItems": [
+        {
+          "name": "Minced Chicken Burger",
+          "variation": "",
+          "quantity": 1,
+          "price": 4.49,
+          "comment": "",
+          "addon": ""
+        }
+      ],
+      "subtotal": "4.49",
+      "tipAmount": "0.00",
+      "total": "4.49",
+      "paymentType": "Cash",
+      "billingDetails": {
+        "first_name": "SASASASSAASS",
+        "last_name": "Saa",
+        "mobile_number": "1234567890",
+        "email_id": "testing@gmail.com",
+        "postcode": "WF10 1BP",
+        "enter_address": " Glasshoughton",
+        "street_name": "Yorkshire and The Humber",
+        "city": "Castleford Central and Glasshoughton"
+      },
+      "timestamp": "2025-05-23T12:12:57.212Z"
+    },
+    {
+      "id": "80e7",
+      "orderId": "EZZY0011",
+      "userEmail": "testing@gmail.com",
+      "orderType": "pickup",
+      "pickupTime": "07:00 PM (Friday)",
       "postcode": null,
       "orderInstructions": "",
       "cartItems": [
         {
           "name": "Chicken Burger",
-          "variation": "Strawberry",
+          "variation": "",
           "quantity": 1,
+          "price": 3.99,
+          "comment": "",
+          "addon": ""
+        }
+      ],
+      "subtotal": "3.99",
+      "tipAmount": "0.60",
+      "total": "4.59",
+      "paymentType": "Cash",
+      "billingDetails": {
+        "first_name": "SASASASSAASS",
+        "last_name": "Saa",
+        "mobile_number": "1234567890",
+        "email_id": "testing@gmail.com",
+        "postcode": "WF10 1BP",
+        "enter_address": " Glasshoughton",
+        "street_name": "Yorkshire and The Humber",
+        "city": "Castleford Central and Glasshoughton"
+      },
+      "timestamp": "2025-05-23T12:17:37.253Z"
+    },
+    {
+      "id": "646f",
+      "orderId": "EZZY0012",
+      "userEmail": "testing@gmail.com",
+      "orderType": "pickup",
+      "pickupTime": "08:00 PM (Friday)",
+      "postcode": null,
+      "orderInstructions": "",
+      "cartItems": [
+        {
+          "name": "Mexicano",
+          "quantity": 1,
+          "price": 4.99,
+          "comment": "",
+          "addon": ""
+        }
+      ],
+      "subtotal": "4.99",
+      "tipAmount": "0.00",
+      "total": "4.99",
+      "paymentType": "Card",
+      "billingDetails": {
+        "first_name": "SASASASSAASS",
+        "last_name": "Saa",
+        "mobile_number": "1234567890",
+        "email_id": "testing@gmail.com",
+        "postcode": "WF10 4AA",
+        "enter_address": "Wakefield",
+        "street_name": "Yorkshire and The Humber",
+        "city": "Wakefield"
+      },
+      "timestamp": "2025-05-23T12:33:33.753Z"
+    },
+    {
+      "id": "7638",
+      "orderId": "EZZY0013",
+      "userEmail": "testing@gmail.com",
+      "orderType": "pickup",
+      "pickupTime": "06:00 PM (Monday)",
+      "postcode": null,
+      "orderInstructions": "",
+      "cartItems": [
+        {
+          "name": "Chicken Burger",
+          "variation": "Fruit Shoot",
+          "quantity": 2,
           "price": 5.99,
           "comment": "",
           "addon": ""
         },
         {
-          "name": "Classic Fried Chicken",
+          "name": "3-PC's Fried Chicken With Meal",
           "variation": "Tango Apple",
-          "quantity": 1,
-          "price": 9,
+          "quantity": 5,
+          "price": 7.8,
           "comment": "",
           "addon": "Fries"
         },
         {
-          "name": "6PC Chicken Bites Meals Comes with Chips & Fruit Shoot",
-          "variation": "Water Bottle",
+          "name": "6PC Chicken Nuggets Meals Comes with Chips & Fruit Shoot",
+          "variation": "Strawberry",
           "quantity": 1,
           "price": 6.99,
           "comment": "",
           "addon": ""
         },
         {
-          "name": "Chicken Fahita",
+          "name": "Mexicano",
           "quantity": 1,
           "price": 4.99,
           "comment": "",
           "addon": ""
         },
         {
-          "name": " Chicken Fahita Meal",
+          "name": "Classic Chicken Bucket (Serves 4)",
+          "variation": "Diet Pepsi",
           "quantity": 1,
-          "price": 6.99,
+          "price": 9.6,
           "comment": "",
           "addon": ""
-        },
-        {
-          "name": "Mexicano Meal",
-          "quantity": 1,
-          "price": 6.99,
-          "comment": "",
-          "addon": ""
-        },
+        }
+      ],
+      "subtotal": "72.56",
+      "tipAmount": "0.00",
+      "total": "72.56",
+      "paymentType": "Cash",
+      "billingDetails": {
+        "first_name": "Testing",
+        "last_name": "Test",
+        "mobile_number": "1234567890",
+        "email_id": "testing@gmail.com",
+        "postcode": "WF10 1AE",
+        "enter_address": "Wakefield",
+        "street_name": "Yorkshire and The Humber",
+        "city": "Wakefield"
+      },
+      "timestamp": "2025-05-26T05:04:21.143Z"
+    },
+    {
+      "id": "9b57",
+      "orderId": "EZZY0014",
+      "userEmail": "testing@gmail.com",
+      "orderType": "delivery",
+      "pickupTime": null,
+      "postcode": "WF10 1AG",
+      "orderInstructions": "",
+      "cartItems": [
         {
           "name": "Quarter Chicken",
           "variation": "Fruit Shoot",
@@ -96,81 +337,31 @@
           "price": 8.99,
           "comment": "",
           "addon": ""
-        },
-        {
-          "name": "Classic Peri Peri Chicken Burger ",
-          "variation": "Diet Pepsi",
-          "quantity": 1,
-          "price": 10.99,
-          "comment": "",
-          "addon": ""
-        },
-        {
-          "name": "Classic Chicken Bucket (Serves 4)",
-          "variation": "Tango Orange",
-          "quantity": 2,
-          "price": 9.6,
-          "comment": "",
-          "addon": ""
         }
       ],
-      "subtotal": "80.13",
-      "tipAmount": "12.02",
-      "total": "92.15",
-      "paymentType": "Card",
-      "billingDetails": {
-        "first_name": "SASASASSAASS",
-        "last_name": "Saa",
-        "mobile_number": "1234567890",
-        "email_id": "testing@gmail.com",
-        "postcode": "",
-        "enter_address": "",
-        "street_name": "",
-        "city": ""
-      },
-      "timestamp": "2025-05-22T06:30:58.536Z"
-    },
-    {
-      "id": "dc29",
-      "orderId": "EZZY0002",
-      "userEmail": "testing@gmail.com",
-      "orderType": "pickup",
-      "pickupTime": "08:30 PM (Thursday)",
-      "postcode": null,
-      "orderInstructions": "",
-      "cartItems": [
-        {
-          "name": "Chicken Burger",
-          "variation": "7UP",
-          "quantity": 2,
-          "price": 5.99,
-          "comment": "",
-          "addon": ""
-        }
-      ],
-      "subtotal": "11.98",
-      "tipAmount": "1.80",
-      "total": "13.78",
+      "subtotal": "8.99",
+      "tipAmount": "0.00",
+      "total": "8.99",
       "paymentType": "Cash",
       "billingDetails": {
-        "first_name": "SASASASSAASS",
-        "last_name": "Saa",
+        "first_name": "Testing",
+        "last_name": "Test",
         "mobile_number": "1234567890",
         "email_id": "testing@gmail.com",
-        "postcode": "",
-        "enter_address": "",
-        "street_name": "",
-        "city": ""
+        "postcode": "WF10 1AE",
+        "enter_address": "Wakefield",
+        "street_name": "Yorkshire and The Humber",
+        "city": "Wakefield"
       },
-      "timestamp": "2025-05-22T06:35:52.418Z"
+      "timestamp": "2025-05-26T05:15:58.535Z"
     },
     {
-      "id": "0576",
-      "orderId": "EZZY0003",
+      "id": "b40a",
+      "orderId": "EZZY0015",
       "userEmail": "testing@gmail.com",
-      "orderType": "pickup",
-      "pickupTime": "10:00 PM (Thursday)",
-      "postcode": null,
+      "orderType": "delivery",
+      "pickupTime": null,
+      "postcode": "WF10 1AH",
       "orderInstructions": "",
       "cartItems": [
         {
@@ -186,48 +377,6 @@
           "price": 4.99,
           "comment": "",
           "addon": ""
-        }
-      ],
-      "subtotal": "9.98",
-      "tipAmount": "1.50",
-      "total": "11.48",
-      "paymentType": "Cash",
-      "billingDetails": {
-        "first_name": "SASASASSAASS",
-        "last_name": "Saa",
-        "mobile_number": "1234567890",
-        "email_id": "testing@gmail.com",
-        "postcode": "Hello ",
-        "enter_address": "Hello",
-        "street_name": "Hello",
-        "city": "Hello"
-      },
-      "timestamp": "2025-05-22T07:42:33.765Z"
-    },
-    {
-      "id": "776d",
-      "orderId": "EZZY0004",
-      "userEmail": "testing@gmail.com",
-      "orderType": "delivery",
-      "pickupTime": null,
-      "postcode": "EH28 8GG",
-      "orderInstructions": "",
-      "cartItems": [
-        {
-          "name": "Chicken Burger",
-          "variation": "Fruit Shoot",
-          "quantity": 1,
-          "price": 5.99,
-          "comment": "",
-          "addon": ""
-        },
-        {
-          "name": "3-PC's Fried Chicken",
-          "variation": "Mirinda",
-          "quantity": 1,
-          "price": 5.8,
-          "comment": "",
-          "addon": "Fries"
         },
         {
           "name": "Mexicano Meal",
@@ -235,31 +384,195 @@
           "price": 6.99,
           "comment": "",
           "addon": ""
+        }
+      ],
+      "subtotal": "16.97",
+      "tipAmount": "2.55",
+      "total": "19.52",
+      "paymentType": "Cash",
+      "billingDetails": {
+        "first_name": "Testing",
+        "last_name": "Test",
+        "mobile_number": "1234567890",
+        "email_id": "testing@gmail.com",
+        "postcode": "WF10 1AE",
+        "enter_address": "Wakefield",
+        "street_name": "Yorkshire and The Humber",
+        "city": "Wakefield"
+      },
+      "timestamp": "2025-05-26T05:18:57.609Z"
+    },
+    {
+      "id": "c62b",
+      "orderId": "EZZY0016",
+      "userEmail": "testing@gmail.com",
+      "orderType": "pickup",
+      "pickupTime": "05:00 PM (Monday)",
+      "postcode": null,
+      "orderInstructions": "",
+      "cartItems": [
+        {
+          "name": "2-PC's Fried Chicken",
+          "variation": "Pepsi Max",
+          "quantity": 1,
+          "price": 3.2,
+          "comment": "",
+          "addon": ""
         },
         {
-          "name": "Kids & Parents Combo",
+          "name": "2-PC's Fried Chicken",
+          "variation": "Diet Pepsi",
+          "quantity": 1,
+          "price": 4.2,
+          "comment": "",
+          "addon": "Fries"
+        },
+        {
+          "name": "6PC Chicken Nuggets Meals Comes with Chips & Fruit Shoot",
           "variation": "Water Bottle",
-          "quantity": 5,
-          "price": 8.65,
+          "quantity": 10,
+          "price": 6.99,
+          "comment": "",
+          "addon": ""
+        },
+        {
+          "name": "Mexicano",
+          "quantity": 1,
+          "price": 4.99,
+          "comment": "",
+          "addon": ""
+        },
+        {
+          "name": " Chicken Fahita Meal",
+          "quantity": 1,
+          "price": 6.99,
+          "comment": "",
+          "addon": ""
+        },
+        {
+          "name": "Quarter Chicken",
+          "variation": "Strawberry",
+          "quantity": 1,
+          "price": 8.99,
+          "comment": "",
+          "addon": ""
+        },
+        {
+          "name": "Peri Peri Veggie Burger",
+          "variation": "1.5 Pepsi",
+          "quantity": 1,
+          "price": 9.49,
+          "comment": "",
+          "addon": ""
+        },
+        {
+          "name": "Peri Peri Veggie Burger",
+          "variation": "",
+          "quantity": 1,
+          "price": 7.49,
+          "comment": "",
+          "addon": ""
+        },
+        {
+          "name": "Peri Peri Chicken & Cheese Melt Burger",
+          "variation": "",
+          "quantity": 1,
+          "price": 10.49,
           "comment": "",
           "addon": ""
         }
       ],
-      "subtotal": "62.03",
-      "tipAmount": "0.00",
-      "total": "62.03",
-      "paymentType": "Cash",
+      "subtotal": "125.74",
+      "tipAmount": "18.86",
+      "total": "144.60",
+      "paymentType": "Card",
       "billingDetails": {
-        "first_name": "SASASASSAASS",
-        "last_name": "Saa",
+        "first_name": "Testing",
+        "last_name": "Test",
         "mobile_number": "1234567890",
         "email_id": "testing@gmail.com",
-        "postcode": "Welcome",
-        "enter_address": "Hello",
-        "street_name": "Hello",
-        "city": "Hello"
+        "postcode": "WF10 1AE",
+        "enter_address": "Wakefield",
+        "street_name": "Yorkshire and The Humber",
+        "city": "Wakefield"
       },
-      "timestamp": "2025-05-22T07:46:31.196Z"
+      "timestamp": "2025-05-26T05:24:19.824Z"
+    },
+    {
+      "id": "3425",
+      "orderId": "EZZY0017",
+      "userEmail": "testing@gmail.com",
+      "orderType": "pickup",
+      "pickupTime": "09:00 PM (Monday)",
+      "postcode": null,
+      "orderInstructions": "",
+      "cartItems": [
+        {
+          "name": "Classic Fried Chicken",
+          "variation": "Tango Orange",
+          "quantity": 1,
+          "price": 8,
+          "comment": "",
+          "addon": ""
+        },
+        {
+          "name": "1 PC's Fried Chicken",
+          "variation": "Pepsi Max",
+          "quantity": 2,
+          "price": 2.7,
+          "comment": "",
+          "addon": "Fries"
+        }
+      ],
+      "subtotal": "13.40",
+      "tipAmount": "2.01",
+      "total": "15.41",
+      "paymentType": "Cash",
+      "billingDetails": {
+        "first_name": "Testing",
+        "last_name": "Test",
+        "mobile_number": "1234567890",
+        "email_id": "testing@gmail.com",
+        "postcode": "WF10 1AE",
+        "enter_address": "Wakefield",
+        "street_name": "Yorkshire and The Humber",
+        "city": "Wakefield"
+      },
+      "timestamp": "2025-05-26T05:49:44.663Z"
+    },
+    {
+      "id": "7495",
+      "orderId": "EZZY0018",
+      "userEmail": "testing@gmail.com",
+      "orderType": "pickup",
+      "pickupTime": "11:30 PM (Monday)",
+      "postcode": null,
+      "orderInstructions": "",
+      "cartItems": [
+        {
+          "name": "Chicken Burger",
+          "variation": "",
+          "quantity": 1,
+          "price": 3.99,
+          "comment": "",
+          "addon": ""
+        }
+      ],
+      "subtotal": "3.99",
+      "tipAmount": "0.60",
+      "total": "4.59",
+      "paymentType": "Card",
+      "billingDetails": {
+        "first_name": "Testing",
+        "last_name": "Test",
+        "mobile_number": "1234567890",
+        "email_id": "testing@gmail.com",
+        "postcode": "WF10 1AE",
+        "enter_address": "Wakefield",
+        "street_name": "Yorkshire and The Humber",
+        "city": "Wakefield"
+      },
+      "timestamp": "2025-05-26T06:07:20.910Z"
     }
   ],
   "products": [

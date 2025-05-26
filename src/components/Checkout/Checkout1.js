@@ -5,7 +5,7 @@ import GuestDetailsForm from "./GuestDetailsForm";
 import PersonalDetailsForm from "./PersonalDetailsForm";
 import ReturningCustomerForm from "./ReturningCustomerForm";
 import FooterImage from "../Home/FooterImage";
-import { useOrder } from "../OrderContext";
+import { useOrder } from "../Order/OrderContext";
 import FooterSection from "../Home/FooterSection";
 import ChangePopup from "./ChangePopup";
 import BillingDetailsForm from "./BillingDetailsForm";
@@ -184,6 +184,28 @@ const Checkout1 = () => {
     return false;
   };
 
+  const generateOrderId = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/orders");
+      if (!response.ok) {
+        throw new Error("Failed to fetch orders for ID generation");
+      }
+      const orders = await response.json();
+      const lastOrder = orders[orders.length - 1];
+      const lastIdNum =
+        lastOrder && lastOrder.orderId
+          ? parseInt(lastOrder.orderId.replace("EZZY", ""), 10)
+          : 0;
+      const newIdNum = (lastIdNum + 1) % 10000;
+      return `EZZY${newIdNum.toString().padStart(4, "0")}`;
+    } catch (error) {
+      console.error("Error generating orderId:", error);
+      return `EZZY${Math.floor(1000 + Math.random() * 9000)
+        .toString()
+        .padStart(4, "0")}`;
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -228,8 +250,8 @@ const Checkout1 = () => {
       }
     }
 
-    if (!orderType) {
-      alert("Please select an order type (Pickup or Delivery).");
+    if (!orderType || !["pickup", "delivery"].includes(orderType)) {
+      alert("Please select a valid order type (Pickup or Delivery).");
       return;
     }
     if (orderType === "pickup" && !pickupTime) {
@@ -241,35 +263,22 @@ const Checkout1 = () => {
       return;
     }
 
-    const generateOrderId = async () => {
-      try {
-        const response = await fetch("http://localhost:8000/orders");
-        const orders = await response.json();
-        const lastOrder = orders[orders.length - 1];
-        const lastIdNum =
-          lastOrder && lastOrder.orderId
-            ? parseInt(lastOrder.orderId.replace("EZZY", ""), 10)
-            : 0;
-        const newIdNum = (lastIdNum + 1) % 10000;
-        return `EZZY${newIdNum.toString().padStart(4, "0")}`;
-      } catch (error) {
-        console.error("Error fetching orders for ID generation:", error);
-        return `EZZY${Math.floor(1000 + Math.random() * 9000)
-          .toString()
-          .padStart(4, "0")}`;
-      }
-    };
-
     const orderId = await generateOrderId();
+
+    // Ensure userEmail is always defined
+    const userEmail =
+      user?.email ||
+      selectedData.email_id ||
+      selectedData.email_address ||
+      "guest@example.com";
+    if (!userEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userEmail)) {
+      alert("Invalid email address. Please provide a valid email.");
+      return;
+    }
 
     const orderData = {
       orderId,
-      userEmail:
-        user && user.email
-          ? user.email
-          : selectedData.email_id ||
-            selectedData.email_address ||
-            "guest@example.com",
+      userEmail,
       orderType,
       pickupTime: orderType === "pickup" ? pickupTime : null,
       postcode: orderType === "delivery" ? postcode : null,
@@ -285,11 +294,15 @@ const Checkout1 = () => {
       subtotal: subtotal.toFixed(2),
       tipAmount: tipAmount.toFixed(2),
       total: total.toFixed(2),
-      paymentType: document.querySelector('input[name="payment-type"]:checked')
-        .value,
+      paymentType:
+        document.querySelector('input[name="payment-type"]:checked')?.value ||
+        "Cash",
       billingDetails: isAuthenticated ? formData2 : selectedData,
       timestamp: new Date().toISOString(),
     };
+
+    // Log orderData for debugging
+    console.log("Submitting orderData:", JSON.stringify(orderData, null, 2));
 
     try {
       const response = await fetch("http://localhost:8000/orders", {
@@ -301,16 +314,20 @@ const Checkout1 = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to save order");
+        const errorText = await response.text();
+        console.error("Failed to save order:", errorText);
+        throw new Error(`Failed to save order: ${errorText}`);
       }
 
       console.log("Order successfully saved:", orderData);
 
+      // Clear local storage
       localStorage.removeItem("cartItems");
       localStorage.removeItem("orderType");
       localStorage.removeItem("postcode");
       localStorage.removeItem("pickupTime");
 
+      // Reset state
       setCartItems([]);
       setOrderType("");
       setPostcode("");
@@ -324,8 +341,8 @@ const Checkout1 = () => {
 
       navigate("/ordersuccess", { state: { orderId } });
     } catch (error) {
-      console.error("Error saving order:", error);
-      alert("Failed to place order. Please try again.");
+      console.error("Error saving order:", error.message);
+      alert(`Failed to place order: ${error.message}. Please try again.`);
     }
   };
 

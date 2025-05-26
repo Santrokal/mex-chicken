@@ -51,7 +51,7 @@ const About = () => {
           <div className="order-2 lg:order-none">
             <div className="mb-3">
               <div className=" text-red text-4xl font-AvertaStdBlack capitalize font-normal">
-                About Roasto & More
+                About Mex Chicken
               </div>
             </div>
             <div className="mb-3">
@@ -61,14 +61,14 @@ const About = () => {
             </div>
             <div>
               <p className="text-base2 font-AvertaStdRegular leading-relaxed">
-                Welcome to Roasto & More, your haven for mouthwatering comfort
+                Welcome to Mex Chicken, your haven for mouthwatering comfort
                 food and Unique and Authentic Choices in Kempston. Indulge in
                 our Classic Original Chicken Shawarma, plus burgers and wraps
                 bursting with fresh flavors. Our warm setting and friendly
                 service enhance every bite, ensuring a memorable dining
                 experience. Prepared with care and passion, each dish reflects
                 our dedication to quality and innovation. Visit us today and
-                explore the tastes that make Roasto & More truly special!
+                explore the tastes that make Mex Chicken truly special!
               </p>
             </div>
             <div className="mt-8 md:mt-12 flex items-center">

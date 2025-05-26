@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "./Home/Navbar";
-import { useAuth } from "../components/Checkout/AuthContext";
-import FooterImage from "./Home/FooterImage";
-import OrderDetails from "./Checkout/OrderDetails";
-import TextureWhite from "../images/Texture-White.png";
-import profileback from "../images/profilebackground.png";
-import rightarrow from "../images/right-arrow 1.png";
-import userImg from "../images/user.png";
-import GroupDown from "../images/Groupdown.png";
+import Navbar from "../Home/Navbar";
+import { useAuth } from "../../components/Checkout/AuthContext";
+import FooterImage from "../Home/FooterImage";
+import OrderDetails from "../Checkout/OrderDetails";
+import TextureWhite from "../../images/Texture-White.png";
+import profileback from "../../images/profilebackground.png";
+import rightarrow from "../../images/right-arrow 1.png";
+import userImg from "../../images/user.png";
+import GroupDown from "../../images/Groupdown.png";
 import TrackOrder from "./TrackOrder";
-import FooterSection from "./Home/FooterSection";
+import FooterSection from "../Home/FooterSection";
 import ProfileAddress from "./ProfileAddress";
 
 const Profile = ({ handleChange }) => {

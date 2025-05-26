@@ -22,7 +22,6 @@ const AddressDisplay = ({ onAddressSelect, selectedAddressIndex }) => {
             const userData = data[0];
             setUserId(userData.id);
             setAddresses(userData.addresses || []);
-            // Select the first address by default if none is selected
             if (
               userData.addresses?.length > 0 &&
               selectedAddressIndex === null
@@ -48,15 +47,15 @@ const AddressDisplay = ({ onAddressSelect, selectedAddressIndex }) => {
         },
         body: JSON.stringify({ addresses: updatedAddresses }),
       });
+
       setAddresses(updatedAddresses);
+
       if (selectedAddressIndex === index) {
-        // Reset selected address if the deleted one was selected
         onAddressSelect(null, null);
       } else if (selectedAddressIndex > index) {
-        // Adjust index if necessary
         onAddressSelect(
           selectedAddressIndex - 1,
-          addresses[selectedAddressIndex - 1]
+          updatedAddresses[selectedAddressIndex - 1]
         );
       }
     } catch (err) {
@@ -72,7 +71,6 @@ const AddressDisplay = ({ onAddressSelect, selectedAddressIndex }) => {
       .then((res) => res.json())
       .then((userData) => {
         setAddresses(userData.addresses || []);
-        // Re-select the first address if available
         if (userData.addresses?.length > 0 && selectedAddressIndex === null) {
           onAddressSelect(0, userData.addresses[0]);
         }
@@ -112,7 +110,8 @@ const AddressDisplay = ({ onAddressSelect, selectedAddressIndex }) => {
                 className="mr-2"
               />
               <span className="text-black">
-                {addr.address}, {addr.city}, {addr.state}, {addr.postcode}
+                {addr?.address || "N/A"}, {addr?.city || "N/A"},{" "}
+                {addr?.state || "N/A"}, {addr?.postcode || "N/A"}
               </span>
             </label>
             <div className="flex space-x-2">

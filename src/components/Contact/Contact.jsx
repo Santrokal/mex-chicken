@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../components/Home/Navbar";
-import Loader from "../components/Home/Loader";
-import FooterImage from "../components/Home/FooterImage";
-import FooterSection from "../components/Home/FooterSection";
-import aboutImg from "../images/rectangle-48.png";
-import contactImg1 from "../images/contactImg1.png";
-import contactImg2 from "../images/contactImg2.png";
-import TextureImg1 from "../images/Texture-White1.png";
+import Navbar from "../../components/Home/Navbar";
+import Loader from "../../components/Home/Loader";
+import FooterImage from "../../components/Home/FooterImage";
+import FooterSection from "../../components/Home/FooterSection";
+import aboutImg from "../../images/rectangle-48.png";
+import contactImg1 from "../../images/contactImg1.png";
+import contactImg2 from "../../images/contactImg2.png";
+import TextureImg1 from "../../images/Texture-White1.png";
 
 const Contact = () => {
   const [loading, setLoading] = useState(true);

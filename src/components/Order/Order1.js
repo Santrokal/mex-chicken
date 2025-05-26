@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Info from "./Info";
-import { useOrder } from "../OrderContext";
+import { useOrder } from "./OrderContext";
 import FriedChicken from "./FriedChicken";
 import KidsMeals from "./KidsMeals";
 import Alert from "./Alert";
@@ -124,24 +124,19 @@ const Order1 = () => {
       document.body.classList.remove("overflow-hidden");
     };
   }, [showAllergyPopup]);
-  const validDeliveryPostcodes = [
-    "EH21 6UU",
-    "EH22 1AA",
-    "EH23 3BB",
-    "EH24 4CC",
-    "EH25 5DD",
-    "EH26 6EE",
-    "EH27 7FF",
-    "EH28 8GG",
-    "EH29 9HH",
-    "EH30 0II",
-  ];
+  const isValidWF10Postcode = (postcode) => {
+    const postcodeRegex = /^WF10\s?[0-9][A-Z]{2}$/i;
+    return postcodeRegex.test(postcode.trim());
+  };
 
   const handleCheckDelivery = () => {
-    const formatted = postcode.trim().toUpperCase();
-    if (validDeliveryPostcodes.includes(formatted)) {
+    if (!postcode) {
+      setIsValid(false);
+      return;
+    }
+    if (isValidWF10Postcode(postcode)) {
       setIsValid(true);
-      setSubmittedCode(formatted);
+      setSubmittedCode(postcode.trim().toUpperCase());
     } else {
       setIsValid(false);
       setSubmittedCode("");
@@ -629,7 +624,6 @@ const Order1 = () => {
                           : "border-gray-300"
                       } bg-grey400 rounded-md p-2 flex-1 cursor-pointer flex flex-col items-center gap-1`}
                       aria-hidden="true">
-                      {/* Radio + Label */}
                       <div className="flex items-center gap-2">
                         <input
                           name="orderType"
@@ -643,7 +637,7 @@ const Order1 = () => {
                         </span>
                       </div>
                       <span className="text-xs text-center">
-                        Starting at : 03:00 PM
+                        Starting at: 03:00 PM
                       </span>
                     </button>
 
@@ -668,7 +662,7 @@ const Order1 = () => {
                         </span>
                       </div>
                       <span className="text-xs text-center">
-                        Starting at : 04:00 PM
+                        Starting at: 04:00 PM
                       </span>
                     </button>
                   </div>
@@ -695,8 +689,6 @@ const Order1 = () => {
                                 </option>
                               ))}
                             </select>
-
-                            {/* Chevron Icon */}
                             <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-500">
                               <i className="bi bi-chevron-down"></i>
                             </div>
@@ -728,7 +720,7 @@ const Order1 = () => {
                         </p>
                         <input
                           type="text"
-                          placeholder="Enter Your Postcode"
+                          placeholder="Enter WF10 Postcode (e.g., WF10 9DN)"
                           value={postcode}
                           onChange={(e) => setPostcode(e.target.value)}
                           className="border border-gray-300 p-3 w-full rounded-md mt-3"
@@ -736,11 +728,10 @@ const Order1 = () => {
                       </div>
                       <button
                         onClick={handleCheckDelivery}
-                        className="bg-red text-base font-semibold text-white w-full p-2 rounded-md cursor-pointer">
+                        className="bg-red text-base font-semibold text-white w-full p-2 rounded-md cursor-pointer hover:bg-red-600">
                         CHECK DELIVERY
                       </button>
 
-                      {/* Pop-up */}
                       {isValid === false && (
                         <div className="fixed inset-0 scroll-m-1 flex justify-center items-center bg-opacity-10 z-50">
                           <div className="edit-pop-up max-w-md mx-auto bg-white rounded-md shadow-custom p-5 text-center">
@@ -748,7 +739,7 @@ const Order1 = () => {
                               <div
                                 className="cursor-pointer text-3xl text-black"
                                 onClick={handleClosePopup}>
-                                &times;
+                                ×
                               </div>
                             </div>
                             <div className="flex flex-col bg-transparent gap-3 items-center py-3">
@@ -758,11 +749,11 @@ const Order1 = () => {
                                 className="w-20 h-20"
                               />
                               <p className="text-base font-semibold text-black">
-                                No Delivery to this Area
+                                No Delivery to this Area (WF10 Only)
                               </p>
                               <button
                                 onClick={handleClosePopup}
-                                className="p-2 px-6 rounded-md bg-red w-50 text-white text-base font-semibold">
+                                className="p-2 px-6 rounded-md bg-red-500 w-50 text-white text-base font-semibold hover:bg-red-600">
                                 Ok
                               </button>
                             </div>

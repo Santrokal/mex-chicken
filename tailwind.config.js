@@ -26,6 +26,7 @@ module.exports = {
         grey500: "#F2F4F3",
         grey300: "#57565E",
         blue: "#0b20d7",
+        blue600: "#524AF8",
       },
       borderRadius: {
         sm2: "8px",

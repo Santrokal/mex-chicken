@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
 import SignUp from "./SignUp";
-import { useAuth } from "./Checkout/AuthContext";
-import loginImg from "../images/loginside.png";
+import { useAuth } from "../Checkout/AuthContext";
+import loginImg from "../../images/loginside.png";
 const Login = ({ onClose, onLoginSuccess }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [error, setError] = useState("");

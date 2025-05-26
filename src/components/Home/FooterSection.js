@@ -33,7 +33,7 @@ const FooterSection = () => {
               <div>
                 <a
                   className="text-base1 no-underline hover:text-red font-Avertastd"
-                  href="/">
+                  href="/contact">
                   Contact
                 </a>
               </div>

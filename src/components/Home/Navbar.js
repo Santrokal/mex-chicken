@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useOrder } from "../OrderContext";
-import Login from "../Login";
+import { useOrder } from "../Order/OrderContext";
+import Login from "../SignUp/Login";
 import logo from "../../images/mex-chicken.png";
 import logo1 from "../../images/fav-Dark.png";
 import userImg from "../../images/user.png";

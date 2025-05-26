@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./Home/Navbar";
 import MainSection from "./Home/MainSection";
 import HeaderSection from "./Home/HeaderSection";
-import AboutSection from "./Home/AboutSection";
+import AboutSection from "./About/AboutSection";
 import FooterImageSection from "./Home/FooterImage";
 import FooterSection from "./Home/FooterSection";
 import Loader from "./Home/Loader";
