@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-rename */
 import React, { useState, useEffect } from "react";
 import { useOrder } from "../Order/OrderContext";
 import deliveryman from "../../images/delivery-man.svg";

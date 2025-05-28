@@ -39,7 +39,6 @@ const Profile = ({ handleChange }) => {
   const [submitMessage1, setSubmitMessage1] = useState("");
 
   useEffect(() => {
-    console.log("User object:", JSON.stringify(user, null, 2));
     if (!user || !user.email) {
       setSubmitMessage("User not authenticated. Please log in.");
       setIsLoading(false);
@@ -84,7 +83,6 @@ const Profile = ({ handleChange }) => {
         }
       })
       .catch((err) => {
-        console.error("Failed to load billing info:", err);
         setSubmitMessage("Failed to load profile data. Please try again.");
       })
       .finally(() => setIsLoading(false));
@@ -123,10 +121,6 @@ const Profile = ({ handleChange }) => {
 
   const handleSubmit = async () => {
     if (!user || !user.email || !userId) {
-      console.error("User, user.email, or userId is undefined:", {
-        user,
-        userId,
-      });
       setSubmitMessage(
         "User not authenticated or user ID missing. Please log in."
       );
@@ -158,7 +152,6 @@ const Profile = ({ handleChange }) => {
     setSubmitMessage("");
 
     try {
-      console.log("Submitting with userId:", userId);
       const response = await fetch(`http://localhost:8000/users/${userId}`, {
         method: "PATCH",
         headers: {
@@ -188,7 +181,6 @@ const Profile = ({ handleChange }) => {
         );
       }
     } catch (error) {
-      console.error("Update error:", error);
       setSubmitMessage(
         error.message || "Failed to update profile. Please try again."
       );
@@ -268,7 +260,6 @@ const Profile = ({ handleChange }) => {
         confirm_password: "",
       });
     } catch (error) {
-      console.error("Password update error:", error);
       setSubmitMessage1(
         error.message || "Failed to update password. Please try again."
       );
@@ -299,7 +290,7 @@ const Profile = ({ handleChange }) => {
           <h1>My Profile</h1>
           <div className="inline-container">
             <p className="inline-content">
-              <span1>Home</span1>
+              <span-1>Home</span-1>
               <img src={rightarrow} alt="Arrow" className="arrow-icon" />
               <span>Profile</span>
             </p>
@@ -516,47 +507,61 @@ const Profile = ({ handleChange }) => {
                       <h6 className="text-black text-lg font-semibold mb-4">
                         Change Password
                       </h6>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                        <input
-                          name="old_password"
-                          value={passwordData.old_password}
-                          onChange={handlePasswordChange}
-                          placeholder="Old Password"
-                          type="password"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm"
-                        />
-                        <input
-                          name="new_password"
-                          value={passwordData.new_password}
-                          onChange={handlePasswordChange}
-                          placeholder="New Password"
-                          type="password"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm"
-                        />
-                      </div>
-                      <div className="md:col-span-5 grid grid-cols-1 md:grid-cols-2 mb-3 gap-4">
-                        <input
-                          name="confirm_password"
-                          value={passwordData.confirm_password}
-                          onChange={handlePasswordChange}
-                          placeholder="Confirm Password"
-                          type="password"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm"
-                        />
-                      </div>
-                      <button
-                        type="button"
-                        onClick={handlePasswordSubmit}
-                        disabled={isSubmitting}
-                        className={`px-5 py-2.5 rounded-md font-semibold text-sm text-white ${
-                          isSubmitting
-                            ? "bg-gray-400 cursor-not-allowed"
-                            : "bg-red hover:bg-red-600"
-                        }`}>
-                        {isSubmitting
-                          ? "Saving..."
-                          : "Save and Update Password"}
-                      </button>
+                      <form>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                          <input
+                            type="text"
+                            name="username"
+                            autoComplete="username"
+                            value="user@example.com"
+                            readOnly
+                            hidden
+                          />
+
+                          <input
+                            name="old_password"
+                            value={passwordData.old_password}
+                            onChange={handlePasswordChange}
+                            placeholder="Old Password"
+                            autoComplete="current-password"
+                            type="password"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm"
+                          />
+                          <input
+                            name="new_password"
+                            value={passwordData.new_password}
+                            onChange={handlePasswordChange}
+                            placeholder="New Password"
+                            autoComplete="new-password"
+                            type="password"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm"
+                          />
+                        </div>
+                        <div className="md:col-span-5 grid grid-cols-1 md:grid-cols-2 mb-3 gap-4">
+                          <input
+                            name="confirm_password"
+                            value={passwordData.confirm_password}
+                            onChange={handlePasswordChange}
+                            placeholder="Confirm Password"
+                            autoComplete="new-password"
+                            type="password"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm"
+                          />
+                        </div>
+                        <button
+                          type="button"
+                          onClick={handlePasswordSubmit}
+                          disabled={isSubmitting}
+                          className={`px-5 py-2.5 rounded-md font-semibold text-sm text-white ${
+                            isSubmitting
+                              ? "bg-gray-400 cursor-not-allowed"
+                              : "bg-red hover:bg-red-600"
+                          }`}>
+                          {isSubmitting
+                            ? "Saving..."
+                            : "Save and Update Password"}
+                        </button>
+                      </form>
                       {submitMessage1 && (
                         <div
                           className={`text-sm mb-4 ${

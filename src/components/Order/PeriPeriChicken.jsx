@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import MincedChickenBurger from "./MincedChickenBurger";
-
+import Friesadd from "./Friesadd";
 const PeriPeriChicken = ({ onAddToCart }) => {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -64,7 +63,7 @@ const PeriPeriChicken = ({ onAddToCart }) => {
                   Add
                 </button>
                 {selectedProduct && (
-                  <MincedChickenBurger
+                  <Friesadd
                     open={dialogOpen}
                     onClose={handleClose}
                     product={selectedProduct}

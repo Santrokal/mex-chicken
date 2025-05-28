@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Dialog } from "@mui/material";
 const Friesadd = ({ open, product, onClose, onAddToCart }) => {
   const [quantity, setQuantity] = useState(1);
-  const [variation, setVariation] = useState("Regular");
+  const [variation, setVariation] = useState("");
   const [addon, setAddon] = useState("");
   const [comment, setComment] = useState("");
 

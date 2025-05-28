@@ -48,9 +48,7 @@ const settings = {
       },
     },
   ],
-  afterChange: function (index) {
-    console.log(`Slider Changed to: ${index + 1}`);
-  },
+  afterChange: function (index) {},
 };
 
 const FooterImage = () => {

@@ -13,11 +13,9 @@ const AddressDisplay = ({ onAddressSelect, selectedAddressIndex }) => {
 
   useEffect(() => {
     if (user?.email) {
-      console.log("Fetching user with email:", user.email);
       fetch(`http://localhost:8000/users?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
-          console.log("Fetched user data:", data);
           if (data.length > 0) {
             const userData = data[0];
             setUserId(userData.id);
@@ -30,9 +28,7 @@ const AddressDisplay = ({ onAddressSelect, selectedAddressIndex }) => {
             }
           }
         })
-        .catch((err) => {
-          console.error("Error fetching addresses:", err);
-        });
+        .catch((err) => {});
     }
   }, [user, onAddressSelect, selectedAddressIndex]);
 

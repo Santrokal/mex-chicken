@@ -29,15 +29,13 @@ const OrderSuccess = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div className="order-success-page">
+        <>
           <Navbar />
-          <div
-            className="d-flex justify-content-center align-items-center p-4"
-            style={{ minHeight: "70vh" }}>
+          <div className="container mb-10 mt-10" style={{ minHeight: "70vh" }}>
             <Card
               style={{
                 width: "100%",
-                maxWidth: "600px",
+
                 backgroundColor: "#fff",
                 padding: "2rem",
                 borderRadius: "16px",
@@ -98,7 +96,7 @@ const OrderSuccess = () => {
           </div>
           <FooterImage />
           <FooterSection />
-        </div>
+        </>
       )}
     </>
   );

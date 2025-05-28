@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Pagination from "@mui/material/Pagination";
+import { useAuth } from "../../components/Checkout/AuthContext";
 
 const statusColor = (status) => {
   switch (status) {
     case "Order Placed":
       return "text-blue600";
     case "Ready":
-      return "text-red";
+      return "text-red500";
     case "Delivered":
       return "text-green-500";
     default:
@@ -31,13 +32,24 @@ const OrderDetails = () => {
   const [pageSize, setPageSize] = useState(10);
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState("");
+  const { user } = useAuth();
 
   const totalPages = Math.ceil(orders.length / pageSize);
 
   useEffect(() => {
     const fetchOrders = async () => {
+      if (!user || !user.email) {
+        setError("User not authenticated. Please log in.");
+        setOrders([]);
+        return;
+      }
+
       try {
-        const response = await fetch("http://localhost:8000/orders");
+        const response = await fetch(
+          `http://localhost:8000/orders?userEmail=${encodeURIComponent(
+            user.email
+          )}`
+        );
         if (!response.ok) {
           throw new Error(`Failed to fetch orders: ${response.status}`);
         }
@@ -65,8 +77,6 @@ const OrderDetails = () => {
 
         setOrders(formattedOrders);
         setError("");
-
-        // Update only the newest order's status after 10 seconds
         if (formattedOrders.length > 0 && formattedOrders[0].isNew) {
           setTimeout(() => {
             setOrders((prevOrders) =>
@@ -95,7 +105,7 @@ const OrderDetails = () => {
     };
 
     fetchOrders();
-  }, []);
+  }, [user]);
 
   const handleChangePage = (event, value) => {
     setPage(value);
@@ -110,43 +120,49 @@ const OrderDetails = () => {
 
   return (
     <div className="max-w-6xl bg-white rounded-lg mx-auto p-4">
-      <h2 className="text-xl font-semibold text-black mb-4">My Order</h2>
+      <h2 className="text-xl font-semibold text-gray-800 mb-4">My Orders</h2>
       {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
       {orders.length === 0 && !error ? (
         <div className="text-gray-600 text-sm">No orders found.</div>
       ) : (
         <>
-          <div className="overflow-x-auto bg-white rounded-lg shadow">
-            <table className="min-w-full text-sm text-left">
+          <div className="overflow-x-auto bg-white rounded-lg shadow-md">
+            <table className="min-w-full text-sm  text-left border-separate border-spacing-0">
               <thead>
-                <tr className="bg-red text-white">
-                  <th className="px-4 py-3">Order No</th>
+                <tr className="bg-red500 text-white">
+                  <th className="px-4 py-3 rounded-tl-lg">Order No</th>
                   <th className="px-4 py-3">Date</th>
                   <th className="px-4 py-3">Status</th>
                   <th className="px-4 py-3">Items</th>
                   <th className="px-4 py-3">Total</th>
-                  <th className="px-4 py-3">Action</th>
+                  <th className="px-4 py-3 rounded-tr-lg">Action</th>
                 </tr>
               </thead>
               <tbody>
                 {paginatedOrders.map((order, idx) => (
-                  <tr key={idx} className="">
-                    <td className="px-4 py-3 font-AvertaStdBold">{order.id}</td>
-                    <td className="py-3 font-AvertaStdBold ">{order.date}</td>
+                  <tr
+                    key={order.id || idx}
+                    className="border-b border-gray-200 hover:bg-gray-50 transition-colors duration-200">
+                    <td className="px-4 py-3 font-AvertaStdBold text-gray-800">
+                      {order.id}
+                    </td>
+                    <td className="py-3 font-AvertaStdBold text-gray-700">
+                      {order.date}
+                    </td>
                     <td
                       className={`px-4 py-3 font-AvertaStdBold ${statusColor(
                         order.status
                       )}`}>
                       {order.status}
                     </td>
-                    <td className="px-4 py-3 font-AvertaStdBold">
+                    <td className="px-4 py-3 font-AvertaStdBold text-gray-700">
                       {order.items}
                     </td>
-                    <td className="px-4 py-3 font-AvertaStdBold">
+                    <td className="px-4 py-3 font-AvertaStdBold text-gray-700">
                       {order.total}
                     </td>
                     <td className="px-4 py-3 font-AvertaStdBold">
-                      <button className="text-black font-medium hover:underline">
+                      <button className="text-red-500 font-medium hover:underline focus:outline-none">
                         {order.action}
                       </button>
                     </td>
@@ -158,13 +174,13 @@ const OrderDetails = () => {
 
           {/* Pagination controls */}
           <div className="flex items-center justify-between mt-4">
-            <div className="text-sm">
-              <label htmlFor="pageSize" className="mr-2">
-                Page size
+            <div className="text-sm text-gray-700">
+              <label htmlFor="pageSize" className="mr-2 font-medium">
+                Page size:
               </label>
               <select
                 id="pageSize"
-                className="border px-2 py-1 rounded text-sm"
+                className="border border-gray-300 px-2 py-1 rounded text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500"
                 value={pageSize}
                 onChange={handlePageSizeChange}>
                 <option value={10}>10</option>

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/iframe-has-title */
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Home/Navbar";
 import Loader from "../../components/Home/Loader";
@@ -184,9 +185,7 @@ const Contact = () => {
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2942.012632334953!2d-1.3505793!3d53.71847270000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487969f00761ef0b%3A0x3a38aac0341226ec!2s8%20Willow%20Rd%2C%20Castleford%20WF10%205AR%2C%20UK!5e1!3m2!1sen!2sin!4v1747919973212!5m2!1sen!2sin"
               width="100%"
               height="500"
-              allowfullscreen
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"></iframe>
+              loading="lazy"></iframe>
           </div>
           <FooterImage />
           <FooterSection />

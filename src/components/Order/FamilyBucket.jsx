@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import MincedChickenBurger from "./MincedChickenBurger";
 
+import Friesadd from "./Friesadd";
 const FamilyBucket = ({ onAddToCart }) => {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -65,7 +65,7 @@ const FamilyBucket = ({ onAddToCart }) => {
                   Add
                 </button>
                 {selectedProduct && (
-                  <MincedChickenBurger
+                  <Friesadd
                     open={dialogOpen}
                     onClose={handleClose}
                     product={selectedProduct}

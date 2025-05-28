@@ -264,8 +264,6 @@ const Checkout1 = () => {
     }
 
     const orderId = await generateOrderId();
-
-    // Ensure userEmail is always defined
     const userEmail =
       user?.email ||
       selectedData.email_id ||

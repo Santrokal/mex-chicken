@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
+/* eslint-disable jsx-a11y/no-redundant-roles */
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Home/Navbar";
 import Loader from "../../components/Home/Loader";
@@ -268,69 +270,69 @@ const AboutUs = () => {
               </div>
             </div>
           </section>
-          <section class="bg-white">
-            <div class="container mx-auto">
-              <div class="features-content mt-24 mb-24 grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 items-center">
-                <div class="features-card-item  px-3 lg:px-5 py-3 lg:py-5 flex flex-col items-center justify-center text-center max-w-xs mx-auto">
-                  <div class="features-icon h-14 mb-7">
+          <section className="bg-white">
+            <div className="container mx-auto">
+              <div className="features-content mt-24 mb-24 grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 items-center">
+                <div className="features-card-item  px-3 lg:px-5 py-3 lg:py-5 flex flex-col items-center justify-center text-center max-w-xs mx-auto">
+                  <div className="features-icon h-14 mb-7">
                     <img
-                      class="my-0 mx-auto h-14 rounded-md dark-invert"
+                      className="my-0 mx-auto h-14 rounded-md dark-invert"
                       src={image11}
                       alt="Features Icon"
                     />
                   </div>
-                  <h4 class="capitalize text-base2 font-AvertaStdBold mb-2">
+                  <h4 className="capitalize text-base2 font-AvertaStdBold mb-2">
                     Best Quality
                   </h4>
-                  <p class="h-20 text-grey300 font-AvertaStdRegular">
+                  <p className="h-20 text-grey300 font-AvertaStdRegular">
                     Delicious dishes that don’t compromise on health, made from
                     fresh, quality ingredients.
                   </p>
                 </div>
-                <div class="features-card-item px-3 lg:px-5 py-3 lg:py-5 flex flex-col items-center justify-center text-center max-w-xs mx-auto">
-                  <div class="features-icon h-14 mb-7">
+                <div className="features-card-item px-3 lg:px-5 py-3 lg:py-5 flex flex-col items-center justify-center text-center max-w-xs mx-auto">
+                  <div className="features-icon h-14 mb-7">
                     <img
-                      class="my-0 mx-auto h-14 rounded-md dark-invert"
+                      className="my-0 mx-auto h-14 rounded-md dark-invert"
                       src={image12}
                       alt="Features Icon"
                     />
                   </div>
-                  <h4 class="capitalize text-base2 font-AvertaStdBold mb-2">
+                  <h4 className="capitalize text-base2 font-AvertaStdBold mb-2">
                     On Time{" "}
                   </h4>
-                  <p class="h-20 text-grey300 font-AvertaStdRegular">
+                  <p className="h-20 text-grey300 font-AvertaStdRegular">
                     Expert chefs crafting exquisite dishes, blending tradition
                     and innovation seamlessly.
                   </p>
                 </div>
-                <div class="features-card-item px-3 lg:px-5 py-3 lg:py-5 flex flex-col items-center justify-center text-center max-w-xs mx-auto">
-                  <div class="features-icon h-14 mb-7">
+                <div className="features-card-item px-3 lg:px-5 py-3 lg:py-5 flex flex-col items-center justify-center text-center max-w-xs mx-auto">
+                  <div className="features-icon h-14 mb-7">
                     <img
-                      class="my-0 mx-auto h-14 rounded-md dark-invert"
+                      className="my-0 mx-auto h-14 rounded-md dark-invert"
                       src={image13}
                       alt="Features Icon"
                     />
                   </div>
-                  <h4 class="capitalize text-base2 font-AvertaStdBold mb-2">
+                  <h4 className="capitalize text-base2 font-AvertaStdBold mb-2">
                     Master Chefs
                   </h4>
-                  <p class="h-20 text-grey300 font-AvertaStdRegular">
+                  <p className="h-20 text-grey300 font-AvertaStdRegular">
                     Spotless kitchen ensuring hygiene and safety, delivering
                     meals prepared in pristine conditions.
                   </p>
                 </div>
-                <div class="features-card-item px-3 lg:px-5 py-3 lg:py-5 flex flex-col items-center justify-center text-center max-w-xs mx-auto">
-                  <div class="features-icon h-14 mb-7">
+                <div className="features-card-item px-3 lg:px-5 py-3 lg:py-5 flex flex-col items-center justify-center text-center max-w-xs mx-auto">
+                  <div className="features-icon h-14 mb-7">
                     <img
-                      class="my-0 mx-auto h-14 rounded-md dark-invert"
+                      className="my-0 mx-auto h-14 rounded-md dark-invert"
                       src={image14}
                       alt="Features Icon"
                     />
                   </div>
-                  <h4 class="capitalize text-base2 font-AvertaStdBold mb-2">
+                  <h4 className="capitalize text-base2 font-AvertaStdBold mb-2">
                     Taste Food
                   </h4>
-                  <p class="h-20 text-grey300 font-AvertaStdRegular">
+                  <p className="h-20 text-grey300 font-AvertaStdRegular">
                     Delicious dishes that don’t compromise on health, made from
                     fresh, quality ingredients.
                   </p>

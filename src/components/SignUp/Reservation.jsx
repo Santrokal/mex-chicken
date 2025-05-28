@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-redundant-roles */
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import Navbar from "../Home/Navbar";
 import Loader from "../Home/Loader";
@@ -42,7 +44,6 @@ const Reservation = ({ handleChange }) => {
     email_id: false,
   });
   useEffect(() => {
-    console.log("User object:", JSON.stringify(user, null, 2));
     if (!user || !user.email) {
       setSubmitMessage("User not authenticated. Please log in.");
       setIsLoading(false);

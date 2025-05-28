@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../Checkout/AuthContext";
 import L from "leaflet";
@@ -34,12 +35,6 @@ const TrackOrder = () => {
 
   useEffect(() => {
     if (showMap && orderType === "delivery") {
-      console.log(
-        "Rendering map: showMap =",
-        showMap,
-        "orderType =",
-        orderType
-      );
       const map = L.map("map").setView([51.505, -0.09], 13);
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -89,12 +84,6 @@ const TrackOrder = () => {
         }
       };
     } else {
-      console.log(
-        "Map not rendered: showMap =",
-        showMap,
-        "orderType =",
-        orderType
-      );
       const mapContainer = document.getElementById("map");
       if (mapContainer) {
         mapContainer.innerHTML = "";
@@ -142,7 +131,6 @@ const TrackOrder = () => {
     setShowMap(false);
     setOrderType("");
     setSubmitMessage("");
-    console.log("Starting track: Reset states", { showMap, orderType });
 
     if (!orderNo) {
       setSubmitMessage("Please enter an order number.");
@@ -168,9 +156,7 @@ const TrackOrder = () => {
       const response = await fetch(
         `http://localhost:8000/orders?orderId=${encodeURIComponent(orderNo)}`
       );
-      console.log("Order API response status:", response.status);
       const responseText = await response.text();
-      console.log("Raw API response:", responseText);
 
       if (!response.ok) {
         console.error("Order API error response:", responseText);

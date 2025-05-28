@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/no-redundant-roles */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState, useRef, useEffect } from "react";
@@ -178,8 +179,6 @@ const Order1 = () => {
 
   /* For Classic Shawarma  */
   const handleAddToCart = (product) => {
-    console.log("Adding to cart:", product);
-
     setCartItems((prevItems) => {
       const existingIndex = prevItems.findIndex(
         (i) => i.name === product.name && i.variation === product.variation
@@ -198,9 +197,7 @@ const Order1 = () => {
     });
   };
 
-  useEffect(() => {
-    console.log("Cart Updated:", cartItems);
-  }, [cartItems]);
+  useEffect(() => {}, [cartItems]);
 
   const handleAddToCart1 = (product) => {
     setCartItems((prevItems) => {
@@ -234,12 +231,12 @@ const Order1 = () => {
   return (
     <div className="order-container">
       <div
-        class="home-section"
+        className="home-section"
         style={{ backgroundImage: `url(${rectangle})` }}>
         <h1>Order Now</h1>
         <div className="inline-container">
           <p className="inline-content">
-            <span1>Home</span1>
+            <span-1>Home</span-1>
             <img src={rightarrow} alt="Arrow" className="arrow-icon" />
             <span>Order Now</span>
           </p>
@@ -247,13 +244,13 @@ const Order1 = () => {
       </div>
 
       <section
-        class="order-now relative bg-cover  bg-center bg-fixed"
-        style={{ backgroundImage: `url(${Group})` }}>
-        <div class="block w-full absolute -top-2 md:-top-5 lg:-top-20 left-0 right-0 z-90">
-          <img class="w-full" src={TextureWhite} alt="Overlay Image" />
+        className="order-now relative bg-cover  bg-center bg-fixed"
+        style={{ backgroundImage: `url(${TextureWhite})` }}>
+        <div className="block w-full absolute -top-2 md:-top-5 lg:-top-20 left-0 right-0 z-90">
+          <img className="w-full" src={TextureWhite} alt="Overlay Image" />
         </div>
-        <div class="relative container">
-          <div class="order-now-content">
+        <div className="relative container">
+          <div className="order-now-content">
             <div className="order-opening mb-5 px-6 py-4 rounded-sm2 bg-yellow">
               <div className="flex flex-col lg:flex-row gap-2 justify-end md:justify-between items-center">
                 <div className="text-black text-cgreen-500 font-Avertastd">
@@ -470,7 +467,7 @@ const Order1 = () => {
               </div>
               {/* Mobile View */}
               <div
-                className="lg:hidden flex items-center gap-4 overflow-x-auto custom-scrollbar-hide py-4 px-2"
+                className="lg:hidden flex no-underline items-center gap-4 overflow-x-auto custom-scrollbar-hide py-4 px-2"
                 style={{
                   overflow: "auto",
                   scrollbarWidth: "none",
@@ -527,7 +524,7 @@ const Order1 = () => {
                     key={item.id}
                     href={`#${item.id}`}
                     data-to-scrollspy-id={item.id}
-                    className="flex-shrink-0 w-36 flex flex-col items-center bg-white rounded-md p-2 shadow-md">
+                    className="flex-shrink-0 w-36 no-underline flex flex-col items-center bg-white rounded-md p-2 shadow-md">
                     <div className="w-28 h-28">
                       <img
                         src={item.img}
@@ -536,15 +533,15 @@ const Order1 = () => {
                         className="w-full h-full object-cover rounded-md"
                       />
                     </div>
-                    <p className="text-center text-sm font-medium text-cgreen-400 hover:text-primary mt-2 line-clamp-2">
+                    <p className="text-center text-sm font-medium text-base2 hover:text-red no-underline mt-2">
                       {item.name}
                     </p>
                   </a>
                 ))}
               </div>
             </div>
-            <div class="order-products lg:col-span-4 ">
-              <div class="flex flex-col gap-3">
+            <div className="order-products lg:col-span-4 ">
+              <div className="flex flex-col gap-3">
                 <div className="w-full search-product shadow-custom rounded-sm2 lg:sticky top-[88px]">
                   <div
                     className="relative flex items-center w-full h-12 rounded-sm2 focus-within:shadow-lg bg-cwhite-primary overflow-hidden"
@@ -794,11 +791,11 @@ const Order1 = () => {
                             </div>
 
                             {/* Quantity & Price */}
-                            <div className="product-actions flex items-center justify-between gap-1 w-2/4">
-                              <div className="product-quantity-actions grid grid-cols-3 items-center divide-x divide-red border-2 border-red  rounded-sm2 max-w-[100px]">
+                            <div className="flex items-center justify-between ">
+                              <div className="grid grid-cols-3 items-center divide-x divide-red border-2 border-red  rounded-sm2 ">
                                 {/* Decrease or Delete */}
                                 <button
-                                  className="flex justify-center items-center text-red cursor-pointer px-3 py-2"
+                                  className="flex justify-center items-center text-red cursor-pointer  "
                                   onClick={() => {
                                     if (item.quantity === 1) {
                                       setCartItems((prev) =>

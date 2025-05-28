@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import logo from "../../images/fav-Dark.png";
 import bottomlogo from "../../images/mex-chickenwhite.png";
 const FooterSection = () => {

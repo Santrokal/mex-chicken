@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MincedChickenBurger from "./MincedChickenBurger";
+import Friesadd from "./Friesadd";
 
 const Burgers = ({ onAddToCart }) => {
   const [products, setProducts] = useState([]);
@@ -75,7 +76,7 @@ const Burgers = ({ onAddToCart }) => {
 
       {/* Render the dialog component if a product is selected */}
       {selectedProduct && (
-        <MincedChickenBurger
+        <Friesadd
           open={dialogOpen}
           onClose={handleClose}
           product={selectedProduct}
