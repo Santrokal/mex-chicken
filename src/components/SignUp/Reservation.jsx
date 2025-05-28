@@ -263,30 +263,37 @@ const Reservation = ({ handleChange }) => {
                       )
                     ))}
                 </div>
-
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5">
-                  <select
-                    name="total_person"
-                    value={formData2?.total_person || ""}
-                    onChange={internalHandleChange}
-                    className="p-3 border border-gray-300 rounded w-full">
-                    <option value="" disabled>
-                      Total Person
-                    </option>
-                    {[1, 2, 3, 4, 5, 6].map((n) => (
-                      <option key={n} value={n}>
-                        {n}
+                  <div className="relative w-full">
+                    <select
+                      name="total_person"
+                      value={formData2?.total_person || ""}
+                      onChange={internalHandleChange}
+                      className="appearance-none p-3 border border-gray-300 rounded w-full bg-white"
+                      style={{
+                        backgroundImage: "none",
+                        WebkitAppearance: "none",
+                        MozAppearance: "none",
+                      }}>
+                      <option value="" disabled>
+                        Total Person
                       </option>
-                    ))}
-                  </select>
-
+                      {[1, 2, 3, 4, 5, 6].map((n) => (
+                        <option key={n} value={n}>
+                          {n}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-500">
+                      <i className="bi bi-chevron-down"></i>
+                    </div>
+                  </div>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <TimePicker
                       label="Time"
                       slotProps={{ textField: { className: "w-full" } }}
                     />
                   </LocalizationProvider>
-
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       label="Date"
@@ -294,7 +301,6 @@ const Reservation = ({ handleChange }) => {
                     />
                   </LocalizationProvider>
                 </div>
-
                 <div className="mt-5">
                   <Textarea
                     minRows={8}
@@ -307,7 +313,6 @@ const Reservation = ({ handleChange }) => {
                     }}
                   />
                 </div>
-
                 <div className="flex justify-center mt-8">
                   <Button
                     variant="solid"
@@ -324,7 +329,6 @@ const Reservation = ({ handleChange }) => {
               <img className="w-full" src={texturewhite} alt="Overlay" />
             </div>
           </section>
-
           <FooterImage />
           <FooterSection />
         </div>

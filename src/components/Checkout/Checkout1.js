@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,18 +8,19 @@ import ReturningCustomerForm from "./ReturningCustomerForm";
 import FooterImage from "../Home/FooterImage";
 import { useOrder } from "../Order/OrderContext";
 import FooterSection from "../Home/FooterSection";
-import ChangePopup from "./ChangePopup";
 import BillingDetailsForm from "./BillingDetailsForm";
 import { useAuth } from "./AuthContext";
 import GroupDown from "../../images/Groupdown.png";
 import TextureWhite from "../../images/Texture-White.png";
 import rectangle from "../../images/rectangle-48.png";
+import PickupOrDeliveryInfo from "./PickupOrDeliveryInfo";
 
 const Checkout1 = () => {
-  const [showChangePopup, setShowChangePopup] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [isValidPostcode, setIsValidPostcode] = useState(null);
+  const [submittedPostcode, setSubmittedPostcode] = useState("");
 
   const {
     orderType,
@@ -209,6 +211,15 @@ const Checkout1 = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log("handleSubmit called with:", {
+      cartItems: cartItems.length,
+      acceptTerms,
+      orderType,
+      isValidPostcode,
+      postcode,
+      pickupTime,
+    });
+
     if (cartItems.length === 0) {
       alert("Your cart is empty. Please add items to proceed.");
       return;
@@ -230,6 +241,13 @@ const Checkout1 = () => {
         alert("Please select a delivery address.");
         return;
       }
+      if (
+        orderType === "delivery" &&
+        (isValidPostcode === false || isValidPostcode === null)
+      ) {
+        alert("Please provide a valid delivery postcode.");
+        return;
+      }
     } else {
       if (selectedOption === null) {
         alert(
@@ -246,6 +264,13 @@ const Checkout1 = () => {
 
       if (!validateForm(selectedData, selectedOption)) {
         alert("Please fill in all required fields correctly.");
+        return;
+      }
+      if (
+        orderType === "delivery" &&
+        (isValidPostcode === false || isValidPostcode === null)
+      ) {
+        alert("Please provide a valid delivery postcode.");
         return;
       }
     }
@@ -299,7 +324,6 @@ const Checkout1 = () => {
       timestamp: new Date().toISOString(),
     };
 
-    // Log orderData for debugging
     console.log("Submitting orderData:", JSON.stringify(orderData, null, 2));
 
     try {
@@ -319,13 +343,11 @@ const Checkout1 = () => {
 
       console.log("Order successfully saved:", orderData);
 
-      // Clear local storage
       localStorage.removeItem("cartItems");
       localStorage.removeItem("orderType");
       localStorage.removeItem("postcode");
       localStorage.removeItem("pickupTime");
 
-      // Reset state
       setCartItems([]);
       setOrderType("");
       setPostcode("");
@@ -336,6 +358,8 @@ const Checkout1 = () => {
       setCustomTip("");
       setAcceptTerms(false);
       setSelectedAddressIndex(null);
+      setIsValidPostcode(null);
+      setSubmittedPostcode("");
 
       navigate("/ordersuccess", { state: { orderId } });
     } catch (error) {
@@ -500,60 +524,8 @@ const Checkout1 = () => {
                 )}
 
                 <div className="mt-5 w-full p-5 bg-white shadow-custom rounded-sm2 shadow-light-theme">
-                  <div className="payment-type">
-                    <div className="flex justify-between items-center flex-wrap gap-2">
-                      <h6 className="text-black font-AvertaStdEB text-sm mt-2">
-                        {orderType === "pickup" ? (
-                          <>Pickup Information </>
-                        ) : (
-                          <>Delivery Information </>
-                        )}
-                      </h6>
-                      <p className="text-black font-Avertastd">£ 0.00</p>
-                      {!showChangePopup && (
-                        <button
-                          type="button"
-                          onClick={() => setShowChangePopup(true)}
-                          className="text-white bg-red px-3 py-2 rounded-sm2 font-Avertastd capitalize">
-                          <i className="bi bi-arrow-left-square-fill"></i>
-                          <span className="ml-1">Change</span>
-                        </button>
-                      )}
-                    </div>
-                    <div>
-                      <p className="text-black font-AvertastdRegular text-sm mt-2">
-                        {orderType === "pickup" ? (
-                          <>
-                            Pickup Time:{" "}
-                            <span className="font-Avertastd">
-                              {pickupTime || "Not selected yet"}
-                            </span>
-                          </>
-                        ) : (
-                          <>
-                            Delivery Postcode:{" "}
-                            <span className="font-Avertastd">
-                              {postcode || "Not provided"}
-                            </span>
-                          </>
-                        )}
-                      </p>
-                    </div>
-                    <div className="mt-6">
-                      <textarea
-                        name="orderNote"
-                        placeholder="e.g Instruction of your order"
-                        className="w-full px-3 py-3 border bg-cwhite-primary text-cgreen-200 border-cgray-600 rounded-sm2 text-sm md:text-base font-AvertastdRegular focus-visible:outline-none"
-                        spellCheck="false"
-                        value={orderInstructions}
-                        onChange={(e) => setOrderInstructions(e.target.value)}
-                      />
-                    </div>
-                  </div>
+                  <PickupOrDeliveryInfo />
                 </div>
-                {showChangePopup && (
-                  <ChangePopup onClose={() => setShowChangePopup(false)} />
-                )}
 
                 <div className="mt-5 w-full p-5 bg-white shadow-custom rounded-sm2 shadow-light-theme">
                   <h6 className="text-black font-Avertastd capitalize">
@@ -569,7 +541,8 @@ const Checkout1 = () => {
                           selectedTip === tip
                             ? "text-red"
                             : "text-green500 hover:border-red hover:text-red"
-                        }`}>
+                        }`}
+                        aria-label={`Select ${tip} tip`}>
                         {tip}
                       </button>
                     ))}
@@ -582,13 +555,15 @@ const Checkout1 = () => {
                             placeholder="Percentage (%)"
                             value={customTip}
                             onChange={handleCustomTipChange}
+                            aria-label="Enter custom tip percentage"
                           />
                         </div>
                       ) : (
                         <button
                           type="button"
                           onClick={() => handleTipClick("Other")}
-                          className="p-2.5 px-5 rounded border-2 hover:border-red min-w-[118px]">
+                          className="p-2.5 px-5 rounded border-2 hover:border-red min-w-[118px]"
+                          aria-label="Select custom tip">
                           Other
                         </button>
                       )}
@@ -614,6 +589,7 @@ const Checkout1 = () => {
                             className="h-4 w-4 cursor-pointer accent-red"
                             value="Cash"
                             defaultChecked
+                            aria-label="Pay with cash"
                           />
                           <label className="ml-1.5 block text-black font-AvertaStdRegular text-sm">
                             Cash
@@ -626,6 +602,7 @@ const Checkout1 = () => {
                             type="radio"
                             className="h-4 w-4 border accent-red cursor-pointer"
                             value="Card"
+                            aria-label="Pay with card"
                           />
                           <label className="ml-1.5 block text-black font-AvertaStdRegular text-sm">
                             Card
@@ -648,7 +625,8 @@ const Checkout1 = () => {
                     <div className="flex sm:justify-center sm:items-center gap-4">
                       <a
                         className="bg-red500 p-1 h-8 w-8 rounded-sm2 flex justify-center items-center cursor-pointer"
-                        href="/order">
+                        href="/order"
+                        aria-label="Add more items to cart">
                         <i className="bi bi-plus-lg text-white w-35"></i>
                       </a>
                     </div>
@@ -776,6 +754,7 @@ const Checkout1 = () => {
                       checked={acceptTerms}
                       onChange={() => setAcceptTerms(!acceptTerms)}
                       className="w-4 rounded-sm bg-black border-black cursor-pointer"
+                      aria-label="Accept terms and conditions"
                     />{" "}
                     I have read and agree to the{" "}
                     <a
@@ -800,7 +779,8 @@ const Checkout1 = () => {
                   <button
                     type="submit"
                     className="cursor-pointer disabled:cursor-not-allowed hover:bg-red paynow-btn flex justify-between items-center bg-red rounded-sm2 w-full gap-3 px-5 py-3"
-                    disabled={!acceptTerms || cartItems.length === 0}>
+                    disabled={!acceptTerms || cartItems.length === 0}
+                    aria-label="Pay now">
                     <div className="text-base font-AvertaStdBold text-white uppercase">
                       Pay Now
                     </div>

@@ -35,7 +35,6 @@ const OrderSuccess = () => {
             <Card
               style={{
                 width: "100%",
-
                 backgroundColor: "#fff",
                 padding: "2rem",
                 borderRadius: "16px",

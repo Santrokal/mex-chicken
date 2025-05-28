@@ -76,11 +76,8 @@ const AddAddress = ({ onClose, userId }) => {
 
       if (data.status === 200) {
         const result = data.result;
-
-        // Create options array simulating different "address choices"
         const options = [];
 
-        // Push admin_ward, parish, admin_district if available (not empty)
         if (result.admin_ward) options.push(result.admin_ward);
         if (result.parish && result.parish !== result.admin_ward)
           options.push(result.parish);
@@ -88,8 +85,6 @@ const AddAddress = ({ onClose, userId }) => {
           options.push(result.admin_district);
 
         setAddressOptions(options);
-
-        // Autofill form fields but clear street address for user to fill
         setFormData((prev) => ({
           ...prev,
           country: result.country || "United Kingdom",
@@ -111,9 +106,6 @@ const AddAddress = ({ onClose, userId }) => {
   const handleSelectAddress = (e) => {
     const selected = e.target.value;
     if (!selected) return;
-
-    // Just set the street address input as empty (user must enter street manually)
-    // Set city to selected area (from dropdown)
     setFormData((prev) => ({
       ...prev,
       city: selected,
