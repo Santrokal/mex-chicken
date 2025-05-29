@@ -17,7 +17,7 @@
     {
       "id": "1592",
       "email": "testing@gmail.com",
-      "password": "TestingTest123",
+      "password": "Testing123",
       "firstName": "Testing",
       "lastName": "Test",
       "phone": "1234567890",
@@ -26,11 +26,11 @@
           "country": "England",
           "state": "Yorkshire and The Humber",
           "city": "Wakefield",
-          "postcode": "WF10 1AE",
-          "address": "Yorkshire"
+          "postcode": "WF10 1AG",
+          "address": "Wakefield"
         }
       ],
-      "confirmPassword": "TestingTest123"
+      "confirmPassword": "Testing123"
     }
   ],
   "orders": [
@@ -1122,6 +1122,92 @@
         "city": "Wakefield"
       },
       "timestamp": "2025-05-28T06:11:08.697Z"
+    },
+    {
+      "id": "09a2",
+      "orderId": "EZZY0032",
+      "userEmail": "testing@gmail.com",
+      "orderType": "delivery",
+      "pickupTime": null,
+      "postcode": "WF10 1AG",
+      "orderInstructions": "",
+      "cartItems": [
+        {
+          "name": "Chicken Fahita",
+          "quantity": 20,
+          "price": 4.99,
+          "comment": "",
+          "addon": ""
+        },
+        {
+          "name": "Mexicano",
+          "quantity": 10,
+          "price": 4.99,
+          "comment": "",
+          "addon": ""
+        },
+        {
+          "name": " Chicken Fahita Meal",
+          "quantity": 10,
+          "price": 6.99,
+          "comment": "",
+          "addon": ""
+        },
+        {
+          "name": "Mexicano Meal",
+          "quantity": 10,
+          "price": 6.99,
+          "comment": "",
+          "addon": ""
+        },
+        {
+          "name": "Quarter Chicken",
+          "variation": "Diet Pepsi",
+          "quantity": 10,
+          "price": 7.99,
+          "comment": "",
+          "addon": "Fries"
+        },
+        {
+          "name": "Classic Peri Peri Chicken Burger ",
+          "variation": "",
+          "quantity": 15,
+          "price": 8.99,
+          "comment": "",
+          "addon": ""
+        },
+        {
+          "name": "Kids + Parents Combo (2 Burgers + 2 Kids Meals + 2 Drinks)",
+          "variation": "",
+          "quantity": 1,
+          "price": 29.99,
+          "comment": "",
+          "addon": ""
+        },
+        {
+          "name": "Kids & Parents Combo",
+          "variation": "1.5 Tango Orange",
+          "quantity": 2,
+          "price": 7.65,
+          "comment": "",
+          "addon": "Fries"
+        }
+      ],
+      "subtotal": "549.54",
+      "tipAmount": "274.77",
+      "total": "824.31",
+      "paymentType": "Card",
+      "billingDetails": {
+        "first_name": "Testing",
+        "last_name": "Test",
+        "mobile_number": "1234567890",
+        "email_id": "testing@gmail.com",
+        "postcode": "WF10 1AG",
+        "enter_address": "Wakefield",
+        "street_name": "Yorkshire and The Humber",
+        "city": "Wakefield"
+      },
+      "timestamp": "2025-05-29T09:40:03.585Z"
     }
   ],
   "products": [

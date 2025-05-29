@@ -5,7 +5,6 @@ import { useOrder } from "../Order/OrderContext";
 import ChangePopup from "./ChangePopup";
 
 const PickupOrDeliveryInfo = () => {
-  const [isValidPostcode, setIsValidPostcode] = useState(null);
   const [submittedPostcode, setSubmittedPostcode] = useState("");
   const [showChangePopup, setShowChangePopup] = useState(false);
 
@@ -14,24 +13,26 @@ const PickupOrDeliveryInfo = () => {
     pickupTime,
     postcode,
     setPostcode,
-    setPickupTime,
+    isValidPostcode,
+    setIsValidPostcode,
     orderInstructions,
     setOrderInstructions,
   } = useOrder();
+
   const handleValidationChange = (isValid, submittedCode) => {
+    console.log("Validation Change:", { isValid, submittedCode });
     setIsValidPostcode(isValid);
     setSubmittedPostcode(submittedCode);
   };
+
   return (
     <>
       <div className="payment-type">
         <div className="flex justify-between items-center flex-wrap gap-2">
           <h6 className="text-black font-AvertaStdEB text-sm mt-2">
-            {orderType === "pickup" ? (
-              <>Pickup Information </>
-            ) : (
-              <>Delivery Information </>
-            )}
+            {orderType === "pickup"
+              ? "Pickup Information"
+              : "Delivery Information"}
           </h6>
           <p className="text-black font-Avertastd">£ 0.00</p>
           {!showChangePopup && (
@@ -46,7 +47,7 @@ const PickupOrDeliveryInfo = () => {
           )}
         </div>
         <div>
-          <p className="text-black font-AvertastdRegular text-sm mt-2">
+          <p className="text-black font-AvertaStdRegular text-sm mt-2">
             {orderType === "pickup" ? (
               <>
                 Pickup Time:{" "}
@@ -72,7 +73,7 @@ const PickupOrDeliveryInfo = () => {
           <textarea
             name="orderNote"
             placeholder="e.g Instruction of your order"
-            className="w-full px-3 py-3 border bg-cwhite-primary text-cgreen-200 border-cgray-600 rounded-sm2 text-sm md:text-base font-AvertastdRegular focus-visible:outline-none"
+            className="w-full px-3 py-3 border bg-cwhite-primary text-cgreen-200 border-cgray-600 rounded-sm2 text-sm md:text-base font-AvertaStdRegular focus-visible:outline-none"
             spellCheck="false"
             value={orderInstructions}
             onChange={(e) => setOrderInstructions(e.target.value)}
@@ -89,5 +90,4 @@ const PickupOrDeliveryInfo = () => {
     </>
   );
 };
-
 export default PickupOrDeliveryInfo;

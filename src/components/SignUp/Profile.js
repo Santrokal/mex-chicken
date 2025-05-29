@@ -11,6 +11,7 @@ import GroupDown from "../../images/Groupdown.png";
 import TrackOrder from "./TrackOrder";
 import FooterSection from "../Home/FooterSection";
 import ProfileAddress from "./ProfileAddress";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const Profile = ({ handleChange }) => {
   const [selectedSection, setSelectedSection] = useState("profile");
@@ -37,7 +38,34 @@ const Profile = ({ handleChange }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
   const [submitMessage1, setSubmitMessage1] = useState("");
+  const [showPassword, setShowPassword] = useState({
+    old: false,
+    new: false,
+    confirm: false,
+  });
 
+  const togglePasswordVisibility = (key) => {
+    setShowPassword((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const renderPasswordInput = (name, placeholder, autoComplete, key) => (
+    <div className="relative w-full">
+      <input
+        name={name}
+        value={passwordData[name]}
+        onChange={handlePasswordChange}
+        placeholder={placeholder}
+        autoComplete={autoComplete}
+        type={showPassword[key] ? "text" : "password"}
+        className="w-full px-4 py-3 pr-10 border border-gray-300 rounded-md text-sm"
+      />
+      <span
+        className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500"
+        onClick={() => togglePasswordVisibility(key)}>
+        {showPassword[key] ? <FiEyeOff /> : <FiEye />}
+      </span>
+    </div>
+  );
   useEffect(() => {
     if (!user || !user.email) {
       setSubmitMessage("User not authenticated. Please log in.");
@@ -518,36 +546,29 @@ const Profile = ({ handleChange }) => {
                             hidden
                           />
 
-                          <input
-                            name="old_password"
-                            value={passwordData.old_password}
-                            onChange={handlePasswordChange}
-                            placeholder="Old Password"
-                            autoComplete="current-password"
-                            type="password"
-                            className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm"
-                          />
-                          <input
-                            name="new_password"
-                            value={passwordData.new_password}
-                            onChange={handlePasswordChange}
-                            placeholder="New Password"
-                            autoComplete="new-password"
-                            type="password"
-                            className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm"
-                          />
+                          {renderPasswordInput(
+                            "old_password",
+                            "Old Password",
+                            "current-password",
+                            "old"
+                          )}
+                          {renderPasswordInput(
+                            "new_password",
+                            "New Password",
+                            "new-password",
+                            "new"
+                          )}
                         </div>
+
                         <div className="md:col-span-5 grid grid-cols-1 md:grid-cols-2 mb-3 gap-4">
-                          <input
-                            name="confirm_password"
-                            value={passwordData.confirm_password}
-                            onChange={handlePasswordChange}
-                            placeholder="Confirm Password"
-                            autoComplete="new-password"
-                            type="password"
-                            className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm"
-                          />
+                          {renderPasswordInput(
+                            "confirm_password",
+                            "Confirm Password",
+                            "new-password",
+                            "confirm"
+                          )}
                         </div>
+
                         <button
                           type="button"
                           onClick={handlePasswordSubmit}

@@ -19,7 +19,6 @@ const Checkout1 = () => {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [isValidPostcode, setIsValidPostcode] = useState(null);
   const [submittedPostcode, setSubmittedPostcode] = useState("");
 
   const {
@@ -33,6 +32,8 @@ const Checkout1 = () => {
     setCartItems,
     orderInstructions,
     setOrderInstructions,
+    isValidPostcode,
+    setIsValidPostcode,
   } = useOrder();
   const { user } = useAuth();
   const isAuthenticated = !!(user && user.email);
@@ -241,13 +242,6 @@ const Checkout1 = () => {
         alert("Please select a delivery address.");
         return;
       }
-      if (
-        orderType === "delivery" &&
-        (isValidPostcode === false || isValidPostcode === null)
-      ) {
-        alert("Please provide a valid delivery postcode.");
-        return;
-      }
     } else {
       if (selectedOption === null) {
         alert(
@@ -266,13 +260,6 @@ const Checkout1 = () => {
         alert("Please fill in all required fields correctly.");
         return;
       }
-      if (
-        orderType === "delivery" &&
-        (isValidPostcode === false || isValidPostcode === null)
-      ) {
-        alert("Please provide a valid delivery postcode.");
-        return;
-      }
     }
 
     if (!orderType || !["pickup", "delivery"].includes(orderType)) {
@@ -285,6 +272,11 @@ const Checkout1 = () => {
     }
     if (orderType === "delivery" && !postcode) {
       alert("Please provide a delivery postcode.");
+      return;
+    }
+    if (orderType === "delivery" && isValidPostcode !== true) {
+      console.log("Postcode validation failed:", { isValidPostcode, postcode }); // Debug log
+      alert("Please provide a valid delivery postcode.");
       return;
     }
 

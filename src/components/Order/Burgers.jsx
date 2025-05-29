@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import MincedChickenBurger from "./MincedChickenBurger";
 import Friesadd from "./Friesadd";
 
 const Burgers = ({ onAddToCart }) => {

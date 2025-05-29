@@ -6,6 +6,7 @@ export const OrderProvider = ({ children }) => {
   const [orderType, setOrderType] = useState("pickup");
   const [pickupTime, setPickupTime] = useState("");
   const [postcode, setPostcode] = useState("");
+  const [isValidPostcode, setIsValidPostcode] = useState(null);
   const [orderInstructions, setOrderInstructions] = useState("");
   const [cartItems, setCartItems] = useState(() => {
     const storedCart = localStorage.getItem("cartItems");
@@ -23,6 +24,8 @@ export const OrderProvider = ({ children }) => {
         setPickupTime,
         postcode,
         setPostcode,
+        isValidPostcode,
+        setIsValidPostcode,
         orderInstructions,
         setOrderInstructions,
       }}>

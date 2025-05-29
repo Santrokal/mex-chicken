@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useOrder } from "./OrderContext";
@@ -305,7 +306,7 @@ const CartDeskView = () => {
                       </p>
                       <button
                         onClick={handleClosePopup}
-                        className="p-2 px-6 rounded-md bg-red-500 w-50 text-white text-base font-semibold hover:bg-red-600">
+                        className="p-2 px-6 rounded-md bg-red w-50 text-base1 font-semibold hover:bg-red">
                         Ok
                       </button>
                     </div>
