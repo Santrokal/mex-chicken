@@ -1,6 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable jsx-a11y/no-redundant-roles */
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState, useEffect } from "react";
 import OrderHead from "./OrderHead";
 import MenuSectionDeskView from "./MenuSectionDeskView";
@@ -22,33 +19,14 @@ import TextureWhite from "../../images/Texture-White.png";
 import GroupDown from "../../images/Groupdown.png";
 
 const Order1 = () => {
-  const {
-    orderType,
-    setOrderType,
-    pickupTime,
-    setPickupTime,
-    postcode,
-    setPostcode,
-    cartItems,
-    setCartItems,
-  } = useOrder();
+  const { orderType, pickupTime, postcode, cartItems, setCartItems } =
+    useOrder();
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  useEffect(() => {
-    const storedCart = localStorage.getItem("cartItems");
-    const storedOrderType = localStorage.getItem("orderType");
-    const storedPostcode = localStorage.getItem("postcode");
-    const storedPickupTime = localStorage.getItem("pickupTime");
-
-    if (storedCart) setCartItems(JSON.parse(storedCart));
-    if (storedOrderType) setOrderType(storedOrderType);
-    if (storedPostcode) setPostcode(storedPostcode);
-    if (storedPickupTime) setPickupTime(storedPickupTime);
-  }, []);
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
@@ -103,6 +81,68 @@ const Order1 = () => {
     });
   };
 
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const productComponents = [
+    {
+      name: "burgers",
+      component: (
+        <Burgers onAddToCart={handleAddToCart} searchTerm={searchTerm} />
+      ),
+    },
+    {
+      name: "fried chicken",
+      component: (
+        <FriedChicken onAddToCart={handleAddToCart} searchTerm={searchTerm} />
+      ),
+    },
+    {
+      name: "kids meals",
+      component: (
+        <KidsMeals onAddToCart={handleAddToCart} searchTerm={searchTerm} />
+      ),
+    },
+    {
+      name: "wraps",
+      component: (
+        <Wraps onAddToCart={handleAddToCart1} searchTerm={searchTerm} />
+      ),
+    },
+    {
+      name: "peri peri chicken",
+      component: (
+        <PeriPeriChicken
+          onAddToCart={handleAddToCart}
+          searchTerm={searchTerm}
+        />
+      ),
+    },
+    {
+      name: "peri peri burgers",
+      component: (
+        <PeriPeriBurgers
+          onAddToCart={handleAddToCart}
+          searchTerm={searchTerm}
+        />
+      ),
+    },
+    {
+      name: "peri peri family meals",
+      component: (
+        <PeriPeriFamilyMeals
+          onAddToCart={handleAddToCart}
+          searchTerm={searchTerm}
+        />
+      ),
+    },
+    {
+      name: "family bucket",
+      component: (
+        <FamilyBucket onAddToCart={handleAddToCart} searchTerm={searchTerm} />
+      ),
+    },
+  ];
+
   return (
     <div className="order-container">
       <div
@@ -129,17 +169,17 @@ const Order1 = () => {
             <OrderHead />
           </div>
           <div className="lg:grid lg:grid-cols-9 gap-3">
-            <div className="order-menu-item lg:col-span-2">
+            <div className=" lg:col-span-2">
               {/* Desktop View */}
               <MenuSectionDeskView />
               {/* Mobile View */}
               <MenuSectionMobileView />
             </div>
-            <div className="order-products lg:col-span-4 ">
+            <div className="lg:col-span-4 ">
               <div className="flex flex-col gap-3">
-                <div className="w-full search-product shadow-custom rounded-sm2 lg:sticky top-[88px]">
+                <div className="w-full search-product  rounded-sm2 lg:sticky">
                   <div
-                    className="relative flex items-center w-full h-12 rounded-sm2 focus-within:shadow-lg bg-cwhite-primary overflow-hidden"
+                    className="relative flex items-center w-full h-12 rounded-sm2 focus-within:shadow-lg bg-base1 overflow-hidden"
                     style={{
                       boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
                     }}>
@@ -147,33 +187,32 @@ const Order1 = () => {
                       <i className="bi bi-search"></i>
                     </div>
                     <input
-                      className="peer h-full w-full outline-none text-base font-AvertastdRegular text-cgreen-200 pr-2"
+                      className=" h-full w-full outline-none text-base2 font-AvertastdRegular  pr-2"
                       type="text"
                       id="search"
                       placeholder="Search.."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                    <div className="px-2 cursor-pointer grid place-items-center h-full w-12 text-black bg-white">
+                    <div
+                      className="px-2 cursor-pointer grid place-items-center h-full w-12 text-black bg-white"
+                      onClick={() => setSearchTerm("")}>
                       <i className="bi bi-x-circle-fill"></i>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="category-products flex flex-col gap-2 gap-y-3 mt-3 shadow-custom rounded-sm2">
+              <div className="  flex-col gap-2 gap-y-3 mt-3 shadow-custom rounded-sm2">
                 <div
-                  className="category-container max-h-[75vh] overflow-y-auto custom_scrollbar pr-2"
+                  className=" max-h-[75vh] overflow-y-auto custom_scrollbar pr-2"
                   style={{
                     overflow: "auto",
                     scrollbarWidth: "none",
                     msOverflowStyle: "none",
                   }}>
-                  <Burgers onAddToCart={handleAddToCart} />
-                  <FriedChicken onAddToCart={handleAddToCart} />
-                  <KidsMeals onAddToCart={handleAddToCart} />
-                  <Wraps onAddToCart={handleAddToCart1} />
-                  <PeriPeriChicken onAddToCart={handleAddToCart} />
-                  <PeriPeriBurgers onAddToCart={handleAddToCart} />
-                  <PeriPeriFamilyMeals onAddToCart={handleAddToCart} />
-                  <FamilyBucket onAddToCart={handleAddToCart} />
+                  {productComponents.map((item, index) => (
+                    <div key={index}>{item.component}</div>
+                  ))}
                 </div>
               </div>
             </div>

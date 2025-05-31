@@ -60,9 +60,9 @@ const Friesadd = ({ open, product, onClose, onAddToCart }) => {
       aria-labelledby="item-dialog-title"
       aria-describedby="item-dialog-description">
       <div className="fixed inset-0 z-50  flex items-center justify-center">
-        <div className="w-96 bg-white rounded-lg shadow-lg">
+        <div className="w-96 bg-base1 rounded-lg ">
           {/* Header */}
-          <div className="p-4 border-b border-gray-300 flex justify-between items-center">
+          <div className="p-4 border-b border-grey300 flex justify-between items-center">
             <h5 className="text-red font-Avertastd">Add Item</h5>
             <button onClick={onClose} className="text-red text-xl">
               <i className="bi bi-x-lg"></i>

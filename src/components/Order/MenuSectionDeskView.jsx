@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-redundant-roles */
 import React, { useState } from "react";
 
 const MenuSectionDeskView = () => {
@@ -19,7 +20,7 @@ const MenuSectionDeskView = () => {
           </div>
         </div>
         <nav
-          className="custom_scrollbar   no-underline flex flex-1 flex-col max-h-[70vh] overflow-x-auto overflow-y-auto "
+          className="custom_scrollbar   no-underline flex flex-1 flex-col  overflow-x-auto overflow-y-auto "
           style={{
             overflow: "auto",
             scrollbarWidth: "none",
@@ -32,7 +33,7 @@ const MenuSectionDeskView = () => {
               <ul role="list" className="-mx-16 text-base2">
                 <li className="border-b border-grey500 cursor-pointer">
                   <a
-                    className={`text-base2 capitalize items-center font-AvertaStdBold no-underline group flex gap-x-3 rounded-md pl-1 pr-2 py-2 ${
+                    className={`text-base2 capitalize items-center font-AvertaStdBold no-underline flex gap-x-3 rounded-md pl-1 pr-2  ${
                       activeItem === "1" ? "text-red" : "hover:text-red"
                     }`}
                     href="#1"

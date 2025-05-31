@@ -583,9 +583,9 @@ const Checkout1 = () => {
                             defaultChecked
                             aria-label="Pay with cash"
                           />
-                          <label className="ml-1.5 block text-black font-AvertaStdRegular text-sm">
+                          <div className="ml-1.5 block text-black font-AvertaStdRegular text-sm">
                             Cash
-                          </label>
+                          </div>
                         </div>
 
                         <div className="flex items-center">
@@ -596,9 +596,9 @@ const Checkout1 = () => {
                             value="Card"
                             aria-label="Pay with card"
                           />
-                          <label className="ml-1.5 block text-black font-AvertaStdRegular text-sm">
+                          <div className="ml-1.5 block text-black font-AvertaStdRegular text-sm">
                             Card
-                          </label>
+                          </div>
                         </div>
                       </div>
                     </div>

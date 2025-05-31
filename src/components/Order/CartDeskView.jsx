@@ -35,17 +35,6 @@ const CartDeskView = () => {
   );
 
   useEffect(() => {
-    const storedCart = localStorage.getItem("cartItems");
-    const storedOrderType = localStorage.getItem("orderType");
-    const storedPostcode = localStorage.getItem("postcode");
-    const storedPickupTime = localStorage.getItem("pickupTime");
-
-    if (storedCart) setCartItems(JSON.parse(storedCart));
-    if (storedOrderType) setOrderType(storedOrderType);
-    if (storedPostcode) setPostcode(storedPostcode);
-    if (storedPickupTime) setPickupTime(storedPickupTime);
-  }, []);
-  useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
@@ -181,8 +170,7 @@ const CartDeskView = () => {
               onClick={() => setOrderType("pickup")}
               className={`border-2 ${
                 orderType === "pickup" ? "border-red" : "border-gray-300"
-              } bg-grey400 rounded-md p-2 flex-1 cursor-pointer flex flex-col items-center gap-1`}
-              aria-hidden="true">
+              } bg-grey400 rounded-md p-2 flex-1 cursor-pointer flex flex-col items-center gap-1`}>
               <div className="flex items-center gap-2">
                 <input
                   name="orderType"
@@ -202,8 +190,7 @@ const CartDeskView = () => {
               onClick={() => setOrderType("delivery")}
               className={`border-2 ${
                 orderType === "delivery" ? "border-red" : "border-gray-300"
-              } bg-grey400 rounded-md p-2 flex-1 cursor-pointer flex flex-col items-center gap-1`}
-              aria-hidden="true">
+              } bg-grey400 rounded-md p-2 flex-1 cursor-pointer flex flex-col items-center gap-1`}>
               <div className="flex items-center gap-2">
                 <input
                   name="orderType"

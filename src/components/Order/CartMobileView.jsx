@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
@@ -28,17 +30,6 @@ const CartMobileView = () => {
   const [submittedCode, setSubmittedCode] = useState("");
   const [timeOptions, setTimeOptions] = useState([]);
 
-  useEffect(() => {
-    const storedCart = localStorage.getItem("cartItems");
-    const storedOrderType = localStorage.getItem("orderType");
-    const storedPostcode = localStorage.getItem("postcode");
-    const storedPickupTime = localStorage.getItem("pickupTime");
-
-    if (storedCart) setCartItems(JSON.parse(storedCart));
-    if (storedOrderType) setOrderType(storedOrderType);
-    if (storedPostcode) setPostcode(storedPostcode);
-    if (storedPickupTime) setPickupTime(storedPickupTime);
-  }, []);
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);

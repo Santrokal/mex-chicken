@@ -56,6 +56,7 @@ const BillingDetailsForm = ({
               name="first_name"
               value={formData2.first_name}
               onChange={internalHandleChange}
+              autoComplete="first_name"
               className="w-full px-3 py-3 border bg-white text-black border-gray-300 rounded text-xs focus-visible:outline-none"
               placeholder="First Name"
               type="text"

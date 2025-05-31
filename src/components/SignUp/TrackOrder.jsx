@@ -138,7 +138,7 @@ const TrackOrder = () => {
     }
     if (!isValidOrderNo(orderNo)) {
       setSubmitMessage(
-        "Order number must be in format EZZY followed by 4 digits (e.g., EZZY0005)."
+        "Order number must be in format EZZY followed by 4 digits (e.g., EZZY0000)."
       );
       return;
     }
